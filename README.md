@@ -3,15 +3,19 @@
 1.03: Gruppenfindung+Erstellung des Git REP
 Konstruktion des Projektes Besprochen.
 Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besprochen.
+Server
 # TOppenau
 1.03:Gruppenfindung+Erstellung des Git REP
 Konstruktion des Projektes Besprochen.
 Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besprochen.
+Auswertung
 # JHofer
 1.03:Gruppenfindung+Erstellung des Git REP
 Konstruktion des Projektes Besprochen.
 Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besprochen.
+Importieren
 # TWuerfli
 1.03:Gruppenfindung+Erstellung des Git REP
 Konstruktion des Projektes Besprochen.
 Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besprochen.
+Client
