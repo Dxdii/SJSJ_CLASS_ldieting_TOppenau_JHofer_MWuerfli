@@ -1,9 +1,9 @@
 # SJSJ_CLASS_ldieting_TOppenau_JHofer_MWuerfli
-#ldieting
+# ldieting
 1.03: Gruppenfindung+Erstellung des Git REP
-#TOppenau
+# TOppenau
 1.03:Gruppenfindung+Erstellung des Git REP
-#JHofer
+# JHofer
 1.03:Gruppenfindung+Erstellung des Git REP
-#TWuerfli
+# TWuerfli
 1.03:Gruppenfindung+Erstellung des Git REP
