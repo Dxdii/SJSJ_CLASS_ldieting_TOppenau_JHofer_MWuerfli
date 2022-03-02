@@ -1,11 +1,13 @@
 import java.net.Socket;
 
-public class Serverthread extends Thread{
+public class Clientthread extends Thread {
     private  Socket socket;
     boolean frunning = true;
-    public Serverthread(Socket sockets) {
-        this.socket = sockets;
+
+    public Clientthread(Socket socket) {
+        this.socket = socket;
     }
+
     @Override
     public void run() {
         do {
