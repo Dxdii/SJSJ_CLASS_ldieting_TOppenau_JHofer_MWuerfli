@@ -1,18 +1,33 @@
+import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Clientthread extends Thread {
-    private  Socket socket;
+    private ServerSocket socket;
     boolean frunning = true;
+    boolean anmeldung = true;
 
-    public Clientthread(Socket socket) {
+    public Clientthread(ServerSocket socket) {
+
         this.socket = socket;
     }
 
-    @Override
     public void run() {
-        do {
+        while (frunning) {
+        while(anmeldung){
+            try {
+                Socket cs = socket.accept();
+                Serverthread s = new Serverthread(cs);
+                s.start();
 
-        } while (frunning);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        }
+
     }
 
     public void close() {
