@@ -8,7 +8,7 @@ public class Mainserver {
             String s;
             int i = 0;
             boolean running = true;
-            ServerSocket a = new ServerSocket(1085);
+            ServerSocket a = new ServerSocket(55555);
             do {
 
                 Clientthread z = new Clientthread(a);

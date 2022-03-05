@@ -6,7 +6,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Countdown {
-    public int countdownStarter = 20;
+    public static int countdownStarter = 20;
 
     public Countdown(DataOutputStream dataOut) {
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -26,6 +26,25 @@ public class Countdown {
                         e.printStackTrace();
                     }
                 }
+
+                if (countdownStarter < 0) {
+                    System.out.println("Timer Over!");
+                    scheduler.shutdown();
+                }
+            }
+
+        };
+        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+    }
+    public Countdown() {
+        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        final Runnable runnable = new Runnable() {
+
+
+            public void run() {
+                System.out.println(countdownStarter);
+                countdownStarter--;
 
                 if (countdownStarter < 0) {
                     System.out.println("Timer Over!");

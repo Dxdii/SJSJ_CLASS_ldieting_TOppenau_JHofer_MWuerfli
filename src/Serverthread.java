@@ -20,19 +20,32 @@ public class Serverthread extends Thread {
                 DataOutputStream dataOut = new DataOutputStream(sockOut);
                 dataOut.writeBytes("oi");
                 dataOut.flush();
-
+                while (true) {
 
                     BufferedReader sockin = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String s = sockin.readLine();
                     if (s.equals("1234")) {
                         Countdown d = new Countdown(dataOut);
+                        do {
+                            if (d.countdownStarter == 0) {
+
+                                dataOut.writeBytes("Testfrage1");
+                                dataOut.flush();
+                                d = new Countdown();
+                                while (d.countdownStarter == 0) {
+                                    s = sockin.readLine();
+                                    System.out.println(s);
+                                }
 
 
+                            }
+                        } while (d.countdownStarter < 0);
                     } else {
                         socket.close();
                         frunning = false;
 
                     }
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
