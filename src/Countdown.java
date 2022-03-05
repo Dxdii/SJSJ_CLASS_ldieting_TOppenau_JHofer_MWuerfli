@@ -36,6 +36,7 @@ public class Countdown {
         };
         scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
     }
+
     public Countdown() {
         final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 

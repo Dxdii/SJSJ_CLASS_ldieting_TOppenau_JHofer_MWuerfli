@@ -16,6 +16,7 @@ public class Clientthread extends Thread {
         while (frunning) {
         while(anmeldung){
             try {
+
                 Socket cs = socket.accept();
                 Serverthread s = new Serverthread(cs);
                 s.start();

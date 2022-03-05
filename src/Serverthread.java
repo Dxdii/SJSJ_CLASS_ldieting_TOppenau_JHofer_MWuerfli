@@ -4,6 +4,7 @@ import java.net.Socket;
 public class Serverthread extends Thread {
     private Socket socket;
     boolean frunning = true;
+    public Countdown d;
 
     public Serverthread(Socket sockets) {
         this.socket = sockets;
@@ -25,7 +26,7 @@ public class Serverthread extends Thread {
                     BufferedReader sockin = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String s = sockin.readLine();
                     if (s.equals("1234")) {
-                        Countdown d = new Countdown(dataOut);
+                        d = new Countdown(dataOut);
                         do {
                             if (d.countdownStarter == 0) {
 
