@@ -8,6 +8,7 @@ public boolean frunning = true;
     public Countdown() {
         countdownStarter = 20;
     }
+
     @Override
     public void run() {
         while(frunning){
@@ -24,6 +25,7 @@ public boolean frunning = true;
         frunning =false;
 
     }
+
     }
 
 }

@@ -9,14 +9,18 @@ public class Mainserver {
             int i = 0;
             boolean running = true;
             ServerSocket a = new ServerSocket(55555);
+            Countdown d = new Countdown();
+            d.start();
+            Clientthread z = new Clientthread(a);
+            z.start();
             do {
 
-                Clientthread z = new Clientthread(a);
-                z.start();
                 if (z.frunning == false) {
                     running = false;
                 }
+
             } while (running == true);
+
 
         } catch (IOException e) {
             e.printStackTrace();
