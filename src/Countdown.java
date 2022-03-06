@@ -1,59 +1,24 @@
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Countdown {
     public static int countdownStarter = 20;
 
-    public Countdown(DataOutputStream dataOut) {
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        final Runnable runnable = new Runnable() {
-
-
-            public void run() {
-                System.out.println(countdownStarter);
-                countdownStarter--;
-                if (countdownStarter < 4 && countdownStarter >= 0) {
-                    try {
-                        dataOut.writeBytes(String.valueOf(countdownStarter));
-                        dataOut.flush();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if (countdownStarter < 0) {
-                    System.out.println("Timer Over!");
-                    scheduler.shutdown();
-                }
-            }
-
-        };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
-    }
-
     public Countdown() {
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        final Runnable runnable = new Runnable() {
-
-
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
             public void run() {
                 System.out.println(countdownStarter);
-                countdownStarter--;
+                if (countdownStarter > 0)
+                    countdownStarter--;
 
-                if (countdownStarter < 0) {
-                    System.out.println("Timer Over!");
-                    scheduler.shutdown();
-                }
+                if (countdownStarter == 0)
+                    System.exit(0);
             }
-
         };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+        timer.schedule(task, 0, 1000);
     }
+
 }
