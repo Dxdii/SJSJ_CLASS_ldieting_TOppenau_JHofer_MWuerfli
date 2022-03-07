@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 public class Mainserver {
     public static void main(String[] args) {
@@ -11,20 +10,26 @@ public class Mainserver {
 
             int i = 0;
             boolean running = true;
-            Frage[] a = null;
+
             FileReader fr = new FileReader(new File("Fragen.csv"));
             BufferedReader br = new BufferedReader(fr);
             String l = br.readLine();
             l = br.readLine();
-
             while (l != null) {
-                String[] fragen = l.split(":");
-                a[i] = new Frage(fragen[2]);
-
                 i++;
                 l = br.readLine();
-
             }
+           br.close();
+            br = new BufferedReader(new FileReader(new File("Fragen.csv")));
+            Frage[] a = new Frage[i];
+            l = br.readLine();
+            i=0;
+            while (l != null) {
+               a[i] = new Frage(l);
+                System.out.println(l);
+                l = br.readLine();
+            }
+
 
             ServerSocket b = new ServerSocket(55555);
             Countdown d = new Countdown();
