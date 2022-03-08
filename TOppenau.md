@@ -8,3 +8,4 @@ Auswertung
 08.03.2022: FXML User-Interface mit ListView und Kreisdiagramm erstellt.
 ConnectDatabase-Klasse für den Verbindungsaufbau zur Datenbank erstellt und getestet.
 Klasse für Fragen für die Auswertung angelegt.
+Libary JavaFX SDK 11.0.2 hinzugefügt.

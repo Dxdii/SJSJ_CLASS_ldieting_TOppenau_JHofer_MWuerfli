@@ -29,8 +29,8 @@ public class ControllerAuswerten {
 
     public void initialize() {
 
-        ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
-        db = database.getConnectToDatabase();
+       // ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
+        //db = database.getConnectToDatabase();
 
     }
 
