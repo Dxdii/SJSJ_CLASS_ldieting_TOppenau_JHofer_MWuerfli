@@ -10,4 +10,8 @@ Je nach dem welcher Fragetyp kommt
     Ja/nein =>  Optionsfelder
     min/max Option => Slider mit min und max
     float Zahl => Eingabefeld
-   
+
+08.03 Client mit Server verbinden
+      JavaFX einbinden => Fehler
+       => wichtig dafür, dass Client mit Controller für FX verbunden werden kann
+       Client.fxml eingebunden

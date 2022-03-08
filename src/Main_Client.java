@@ -9,7 +9,6 @@ public class Main_Client {
         Socket socket = null;
         try
         {
-
             // getting localhost ip
             InetAddress ip = InetAddress.getByName("localhost");
 
@@ -20,7 +19,7 @@ public class Main_Client {
             DataInputStream dis = new DataInputStream(s.getInputStream());
             DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
-
+            dis.close();
             dos.close();
         }catch(Exception e){
             e.printStackTrace();
