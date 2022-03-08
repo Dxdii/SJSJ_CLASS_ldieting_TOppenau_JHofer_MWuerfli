@@ -10,7 +10,7 @@ public class MainAuswerten extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/sampleAuswerten.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("sampleAuswerten.fxml"));
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 475));
