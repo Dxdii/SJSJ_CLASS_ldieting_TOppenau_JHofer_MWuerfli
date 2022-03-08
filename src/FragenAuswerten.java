@@ -1,7 +1,7 @@
 
 public class FragenAuswerten {
 
-    private int index;
+    private int kennnummer;
     private int type;
     private String frage;
     private int min;
@@ -11,8 +11,8 @@ public class FragenAuswerten {
 
     }
 
-    FragenAuswerten(int index, int type, String frage, int min, int max) {
-        this.index = index;
+    FragenAuswerten(int kennnummer, int type, String frage, int min, int max) {
+        this.kennnummer = kennnummer;
         this.type = type;
         this.frage = frage;
         this.min = min;
@@ -21,7 +21,7 @@ public class FragenAuswerten {
     }
 
     public int getIndex() {
-        return index;
+        return kennnummer;
     }
 
     public int getType() {
@@ -40,8 +40,8 @@ public class FragenAuswerten {
         return max;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setKennnummer(int index) {
+        this.kennnummer = kennnummer;
     }
 
     public void setType(int type) {

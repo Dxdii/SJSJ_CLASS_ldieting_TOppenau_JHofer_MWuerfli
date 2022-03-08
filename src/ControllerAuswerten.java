@@ -29,8 +29,8 @@ public class ControllerAuswerten {
 
     public void initialize() {
 
-       // ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
-        //db = database.getConnectToDatabase();
+        ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
+        db = database.getConnectToDatabase();
 
     }
 
@@ -40,7 +40,7 @@ public class ControllerAuswerten {
 
         try {
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM schueler");
+            ResultSet rs = st.executeQuery("SELECT * FROM frage");
 
             //List<Schueler> schuelerList = new ArrayList<>();
             //ObservableList<Schueler> schuelerList = new ObservableList<Schueler>();
@@ -50,11 +50,11 @@ public class ControllerAuswerten {
             while (rs.next()) {
                 FragenAuswerten frage = new FragenAuswerten();
 
-                frage.setIndex(rs.getInt("Index"));
-                frage.setFrage(rs.getString("Frage"));
-
-
-
+                frage.setKennnummer(rs.getInt("kennummer"));
+                frage.setFrage(rs.getString("text"));
+                frage.setMin(rs.getInt("min"));
+                frage.setMax(rs.getInt("max"));
+                frage.setType(rs.getInt("type"));
 
                 fragenList.add(frage);
             }
