@@ -19,6 +19,6 @@ Importieren
 Konstruktion des Projektes Besprochen.
 Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besprochen.
 Client
-#Zugang zu den Tabellen
+# Zugang zu den Tabellen
 user: reader
 passwort: reader
