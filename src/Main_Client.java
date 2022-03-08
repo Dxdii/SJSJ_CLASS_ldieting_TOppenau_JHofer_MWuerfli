@@ -1,4 +1,5 @@
 import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -6,35 +7,23 @@ import java.net.UnknownHostException;
 public class Main_Client {
     public static void main(String[] args) {
         Socket socket = null;
-        try {
-            socket = new Socket("localhost", 55555);
+        try
+        {
 
-            OutputStream raus = socket.getOutputStream();
-            PrintStream ps = new PrintStream(raus, true);
-            ps.println("Client verbunden");
+            // getting localhost ip
+            InetAddress ip = InetAddress.getByName("localhost");
 
-            InputStream input = socket.getInputStream();
-            BufferedReader buff = new BufferedReader(new InputStreamReader(input));
+            // establish the connection with server port 5056
+            Socket s = new Socket(ip, 5056);
 
-            while (buff.ready()) {
-                System.out.println(buff.readLine());
-            }
+            // obtaining input and out streams
+            DataInputStream dis = new DataInputStream(s.getInputStream());
+            DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 
-        } catch (UnknownHostException e) {
-            System.out.println("Unbekannter Host...");
+
+            dos.close();
+        }catch(Exception e){
             e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("IOProbleme...");
-            e.printStackTrace();
-        } finally {
-            if (socket != null)
-                try {
-                    socket.close();
-                    System.out.println("Socket geschlossen...");
-                } catch (IOException e) {
-                    System.out.println("Socket nicht möglich zu schliessen...");
-                    e.printStackTrace();
-                }
         }
     }
 }
