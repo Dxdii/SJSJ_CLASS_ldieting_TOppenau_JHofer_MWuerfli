@@ -13,20 +13,37 @@ public class Clientthread extends Thread {
     }
 
     public void run() {
+
         while (frunning) {
-        while(anmeldung){
+        if(Countdown.countdownStarter==0){
+            anmeldung = false;
+        }
+        if(anmeldung){
             try {
 
                 Socket cs = socket.accept();
                 Serverthread s = new Serverthread(cs);
                 s.start();
 
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
 
+        }else{
+            try {
+
+                Socket cs = socket.accept();
+                DataOutputStream dataOut = new DataOutputStream(cs.getOutputStream());
+                dataOut.writeBytes("Zu Spaet");
+                dataOut.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
+
         }
 
     }

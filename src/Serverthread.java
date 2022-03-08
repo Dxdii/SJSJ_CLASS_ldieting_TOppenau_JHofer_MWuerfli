@@ -4,7 +4,7 @@ import java.net.Socket;
 public class Serverthread extends Thread {
     private Socket socket;
     boolean frunning = true;
-    public Countdown d;
+
 
     public Serverthread(Socket sockets) {
         this.socket = sockets;
@@ -19,33 +19,33 @@ public class Serverthread extends Thread {
                 sockOut = socket.getOutputStream();
 
                 DataOutputStream dataOut = new DataOutputStream(sockOut);
-                dataOut.writeBytes("oi");
+                dataOut.writeBytes("Willkommen bitte Melden sie sich zur Umfrage an");
                 dataOut.flush();
-                while (true) {
 
+                while (true) {
                     BufferedReader sockin = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     String s = sockin.readLine();
                     if (s.equals("1234")) {
-                        d = new Countdown(dataOut);
-                        do {
-                            if (d.countdownStarter == 0) {
+                        boolean fragezeit = true;
+                       while(fragezeit){
 
-                                dataOut.writeBytes("Testfrage1");
-                                dataOut.flush();
-                                d = new Countdown();
-                                while (d.countdownStarter == 0) {
-                                    s = sockin.readLine();
-                                    System.out.println(s);
-                                }
+                           if(Countdown.countdownStarter ==0){
+                               dataOut.writeBytes("Testfrage 1");
+                               dataOut.flush();
+
+                               if(Countdown.countdownStarter==0){
+
+                                 s = sockin.readLine();
+                                   System.out.println(s);
 
 
-                            }
-                        } while (d.countdownStarter < 0);
-                    } else {
-                        socket.close();
-                        frunning = false;
+                               }
 
-                    }
+                           }
+
+
+                       }
+                        }
                 }
 
             } catch (IOException e) {

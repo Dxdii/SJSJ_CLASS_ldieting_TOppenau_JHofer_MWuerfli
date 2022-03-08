@@ -1,59 +1,31 @@
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
 
-public class Countdown {
+public class Countdown extends Thread{
     public static int countdownStarter = 20;
-
-    public Countdown(DataOutputStream dataOut) {
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        final Runnable runnable = new Runnable() {
-
-
-            public void run() {
-                System.out.println(countdownStarter);
-                countdownStarter--;
-                if (countdownStarter < 4 && countdownStarter >= 0) {
-                    try {
-                        dataOut.writeBytes(String.valueOf(countdownStarter));
-                        dataOut.flush();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if (countdownStarter < 0) {
-                    System.out.println("Timer Over!");
-                    scheduler.shutdown();
-                }
-            }
-
-        };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
-    }
-
+public boolean frunning = true;
     public Countdown() {
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        final Runnable runnable = new Runnable() {
-
-
-            public void run() {
-                System.out.println(countdownStarter);
-                countdownStarter--;
-
-                if (countdownStarter < 0) {
-                    System.out.println("Timer Over!");
-                    scheduler.shutdown();
-                }
-            }
-
-        };
-        scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+        countdownStarter = 20;
     }
+
+    @Override
+    public void run() {
+        while(frunning){
+        while (countdownStarter  != 0) {
+            try {
+                Thread.sleep(1000);
+              countdownStarter--;
+                System.out.println(countdownStarter);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        frunning =false;
+
+    }
+
+    }
+
 }
