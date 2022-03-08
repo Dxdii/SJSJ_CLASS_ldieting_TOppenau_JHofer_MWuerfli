@@ -1,13 +1,19 @@
+package Server;
+
+import Modules.Frage;
+
 import java.io.*;
 import java.net.Socket;
+import java.util.Vector;
 
 public class Serverthread extends Thread {
     private Socket socket;
     boolean frunning = true;
+    Vector<Frage> d;
 
-
-    public Serverthread(Socket sockets) {
+    public Serverthread(Socket sockets, Vector<Frage> a) {
         this.socket = sockets;
+        d = a;
     }
 
     @Override
@@ -27,25 +33,27 @@ public class Serverthread extends Thread {
                     String s = sockin.readLine();
                     if (s.equals("1234")) {
                         boolean fragezeit = true;
-                       while(fragezeit){
+                        int i = 0;
+                        while (fragezeit) {
 
-                           if(Countdown.countdownStarter ==0){
-                               dataOut.writeBytes("Testfrage 1");
-                               dataOut.flush();
+                            // if (Countdown.countdownStarter == 0) {
+                            dataOut.writeBytes(d.get(i).text);
+                            dataOut.flush();
+                            i++;
 
-                               if(Countdown.countdownStarter==0){
+                            //   if (Countdown.countdownStarter == 0) {
 
-                                 s = sockin.readLine();
-                                   System.out.println(s);
-
-
-                               }
-
-                           }
+                            s = sockin.readLine();
+                            System.out.println(s);
 
 
-                       }
+                            // }
+
+                            //}
+
+
                         }
+                    }
                 }
 
             } catch (IOException e) {

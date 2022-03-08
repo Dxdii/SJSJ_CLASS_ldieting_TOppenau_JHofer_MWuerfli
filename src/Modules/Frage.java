@@ -1,5 +1,7 @@
+package Modules;
+
 public class Frage {
-    String text;
+   public String text;
 
     public Frage(String s) {
         text = s;

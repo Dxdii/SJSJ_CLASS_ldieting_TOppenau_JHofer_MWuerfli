@@ -1,8 +1,13 @@
+package Server;
+
+import Modules.Frage;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Vector;
 
 public class Mainserver {
     public static void main(String[] args) {
@@ -13,28 +18,20 @@ public class Mainserver {
 
             FileReader fr = new FileReader(new File("Fragen.csv"));
             BufferedReader br = new BufferedReader(fr);
+            Vector<Frage> Questions = new Vector<>();
             String l = br.readLine();
-            l = br.readLine();
             while (l != null) {
-                i++;
+                Questions.add(new Frage(l));
                 l = br.readLine();
             }
-           br.close();
+            br.close();
             br = new BufferedReader(new FileReader(new File("Fragen.csv")));
-            Frage[] a = new Frage[i];
-            l = br.readLine();
-            i=0;
-            while (l != null) {
-               a[i] = new Frage(l);
-                System.out.println(l);
-                l = br.readLine();
-            }
 
 
             ServerSocket b = new ServerSocket(55555);
             Countdown d = new Countdown();
             d.start();
-            Clientthread z = new Clientthread(b);
+            Clientthread z = new Clientthread(b,Questions);
             z.start();
 
             do {

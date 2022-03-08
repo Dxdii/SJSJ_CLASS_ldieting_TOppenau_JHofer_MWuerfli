@@ -4,5 +4,5 @@ Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besp
 Server
 
 8.03:
-Countdown Server geaddet Multi threading und Grundgerüst Server Passwort 1234
+Server.Countdown Server geaddet Multi threading und Grundgerüst Server Passwort 1234
 JAvafx implementiert eigene Packages installation Postgres und Java fx Bibliotheken
