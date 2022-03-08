@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerAuswerten">
+    <top>
+        <Label prefHeight="36.0" prefWidth="325.0" text="Polling ProjectPolling Project - Auswertung" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+    </top>
+    <left>
+        <ListView fx:id="listFrage" onEditCancel="#listCancel" onEditCommit="#listCommit" onEditStart="#listStart" onMouseClicked="#listMouseClicked" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </left>
+    <bottom>
+        <HBox prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdateClicked" prefHeight="70.0" prefWidth="227.0" text="Update" />
+                    </children>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button fx:id="btnAuswerten" mnemonicParsing="false" onAction="#btnAuswertenClicked" prefHeight="79.0" prefWidth="285.0" text="Auswerten" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+    </bottom>
+    <right>
+        <PieChart prefHeight="282.0" prefWidth="261.0" BorderPane.alignment="CENTER" />
+    </right>
+    <center>
+        <VBox prefHeight="299.0" prefWidth="122.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label prefWidth="139.0" text="Häufigkeiten der AntwortenHäufigkeiten der Antworten" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <TextField fx:id="textHaeufigkeit" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="145.0" text="Mittelwert" textAlignment="CENTER" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <TextField fx:id="textMittelwert" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="141.0" text="Standardabweichung" textAlignment="CENTER" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <TextField fx:id="textStandardabweichung" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

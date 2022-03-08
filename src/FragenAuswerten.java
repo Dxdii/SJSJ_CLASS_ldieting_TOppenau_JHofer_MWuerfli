@@ -1,0 +1,64 @@
+
+public class FragenAuswerten {
+
+    private int index;
+    private int type;
+    private String frage;
+    private int min;
+    private int max;
+
+    FragenAuswerten() {
+
+    }
+
+    FragenAuswerten(int index, int type, String frage, int min, int max) {
+        this.index = index;
+        this.type = type;
+        this.frage = frage;
+        this.min = min;
+        this.max = max;
+
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public String getFrage() {
+        return frage;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setFrage(String frage) {
+        this.frage = frage;
+    }
+
+    public void setMin(int min) {
+        this.min = min;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+
+
+}
