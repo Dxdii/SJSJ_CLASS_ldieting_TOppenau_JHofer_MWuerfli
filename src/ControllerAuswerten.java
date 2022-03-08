@@ -22,15 +22,15 @@ public class ControllerAuswerten {
     public TextField textMittelwert;
     public TextField textStandardabweichung;
 
-
+    int index;
     Connection db = null;
 
     List<FragenAuswerten> fragenList = new ArrayList<>();
 
     public void initialize() {
 
-        ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
-        db = database.getConnectToDatabase();
+       // ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
+        //db = database.getConnectToDatabase();
 
     }
 
@@ -83,6 +83,12 @@ public class ControllerAuswerten {
     }
 
     public void listMouseClicked(MouseEvent mouseEvent) {
+
+        index = listFrage.getSelectionModel().getSelectedIndex();
+
+        System.out.println(index);  // ausgewählte Zeile
+
+
     }
 
     public void listCancel(ListView.EditEvent editEvent) {
