@@ -19,6 +19,9 @@ Importieren
 Konstruktion des Projektes Besprochen.
 Erste Ideen gesammelt. Klassendiagramm + Client Server Schnittstelle fertig besprochen.
 Client
+#libs
+Einstellungen für das Programm.
+Javafx Library und Postgres Lib bitte in das Projekt hinzufügen.
 # Zugang zu den Tabellen
 user: reader
 passwort: reader
