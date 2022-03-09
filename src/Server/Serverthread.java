@@ -40,7 +40,9 @@ public class Serverthread extends Thread {
                             dataOut.writeBytes(d.get(i).text);
                             dataOut.flush();
                             i++;
-
+                            if (i >=d.size()) {
+                                i = 0;
+                            }
                             //   if (Countdown.countdownStarter == 0) {
 
                             s = sockin.readLine();
