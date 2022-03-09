@@ -9,3 +9,7 @@ Auswertung
 ConnectDatabase-Klasse für den Verbindungsaufbau zur Datenbank erstellt und getestet.
 Klasse für Fragen für die Auswertung angelegt.
 Libary JavaFX SDK 11.0.2 hinzugefügt.
+
+09.03.2022: Eigenes Package im src Ordner erstellen.
+Fragen aus der Datenbank in einer ListView ausgeben.
+PieChart erstsellen und mit Testwerten aus einer ObservableList befüllen und anschließend testen.

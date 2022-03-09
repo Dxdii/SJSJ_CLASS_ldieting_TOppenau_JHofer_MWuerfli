@@ -1,6 +1,9 @@
 package Auswerten;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -24,10 +27,14 @@ public class ControllerAuswerten {
     public TextField textMittelwert;
     public TextField textStandardabweichung;
 
+    public PieChart chartKreis;
+
     int index;
     Connection db = null;
 
     List<FragenAuswerten> fragenList = new ArrayList<>();
+
+    ObservableList<PieChart.Data> pieChartData;
 
     public void initialize() {
 
@@ -85,6 +92,18 @@ public class ControllerAuswerten {
     public void btnAuswertenClicked(ActionEvent actionEvent) {
 
         System.out.println("Button Auswerten!");
+
+
+        pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Num1",7),
+                new PieChart.Data("Num2",14),
+                new PieChart.Data("Num3",2),
+                new PieChart.Data("Num4",5)
+            );
+
+        chartKreis.getData().addAll(pieChartData);
+
+
     }
 
     public void listMouseClicked(MouseEvent mouseEvent) {
