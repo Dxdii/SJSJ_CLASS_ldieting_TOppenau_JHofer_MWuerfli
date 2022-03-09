@@ -93,7 +93,7 @@ public class ControllerAuswerten {
 
         System.out.println("Button Auswerten!");
 
-
+/*
         pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Num1",7),
                 new PieChart.Data("Num2",14),
@@ -101,17 +101,66 @@ public class ControllerAuswerten {
                 new PieChart.Data("Num4",5)
             );
 
+
+        chartKreis.getData().clear();
+
         chartKreis.getData().addAll(pieChartData);
+
+ */
 
 
     }
 
     public void listMouseClicked(MouseEvent mouseEvent) {
 
+        int type;
+
         index = listFrage.getSelectionModel().getSelectedIndex();
 
         System.out.println(index);  // ausgewählte Zeile
 
+        type = fragenList.get(index).getType();
+        System.out.println("Typ-Frage: " + type);
+
+
+        switch (type){
+            case 1:
+                System.out.println("Fragen-Typ => JA/NEIN");
+                pieChartData = FXCollections.observableArrayList(
+                        new PieChart.Data("JA",7),
+                        new PieChart.Data("NEIN",14)
+                );
+                break;
+
+            case 2:
+                System.out.println("Fragen-Typ => Min-Max");
+
+                break;
+
+            case 3:
+                System.out.println("Fragen-Typ => Nummer");
+
+                break;
+
+            default:
+                System.err.println("Fehler Fragen-Typ nicht bekannt!");
+                break;
+        }
+/*
+        pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Num1",7),
+                new PieChart.Data("Num2",14),
+                new PieChart.Data("Num3",2),
+                new PieChart.Data("Num4",5)
+        );
+
+
+ */
+
+
+        chartKreis.getData().clear();
+
+        chartKreis.getData().addAll(pieChartData);
 
     }
 
