@@ -44,10 +44,12 @@ public class ControllerAuswerten {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM frage");
 
-            //List<Schueler> schuelerList = new ArrayList<>();
-            //ObservableList<Schueler> schuelerList = new ObservableList<Schueler>();
+            //List<FragenAuswerten> fragenList = new ArrayList<>();
+            //ObservableList<FragenAuswerten> fragenList = new ObservableList<FragenAuswerten>();
 
             fragenList.clear();   // ArrayList löschen
+
+            btnUpdate.setStyle("-fx-background-color: rgb(0,225,0);");
 
             while (rs.next()) {
                 FragenAuswerten frage = new FragenAuswerten();
@@ -56,7 +58,7 @@ public class ControllerAuswerten {
                 frage.setFrage(rs.getString("text"));
                 frage.setMin(rs.getInt("min"));
                 frage.setMax(rs.getInt("max"));
-                frage.setType(rs.getInt("type"));
+                frage.setType(rs.getInt("typ"));
 
                 fragenList.add(frage);
             }
@@ -64,9 +66,9 @@ public class ControllerAuswerten {
             rs.close();
             st.close();
 
-            //System.out.println(schuelerList.get(1).getVorname());
+            System.out.println(fragenList.get(1).getFrage());
 
-            listFrage.getItems().clear();
+            listFrage.getItems().clear();   // Einträge in der Liste löschen!
 
             fragenList.forEach(frage -> {
                 listFrage.getItems().add(frage.getFrage());
@@ -76,6 +78,7 @@ public class ControllerAuswerten {
                 throwables.printStackTrace();
                 System.err.println("Fehler beim Einlesen der Daten aus der Datenbank!");
                 btnUpdate.setText("Fehler DB!!!");
+                btnUpdate.setStyle("-fx-background-color: rgb(225,0,0);");
         }
     }
 

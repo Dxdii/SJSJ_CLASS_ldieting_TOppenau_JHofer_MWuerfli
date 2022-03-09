@@ -13,7 +13,7 @@ public class MainAuswerten extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sampleAuswerten.fxml"));
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Polling Project - Auswertung - Tim Oppenauer");
         primaryStage.setScene(new Scene(root, 600, 475));
         primaryStage.show();
     }
