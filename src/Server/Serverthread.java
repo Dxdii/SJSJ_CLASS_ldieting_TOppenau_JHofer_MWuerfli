@@ -25,7 +25,7 @@ public class Serverthread extends Thread {
                 sockOut = socket.getOutputStream();
 
                 DataOutputStream dataOut = new DataOutputStream(sockOut);
-                dataOut.writeBytes("Willkommen bitte Melden sie sich zur Umfrage an");
+                dataOut.writeBytes("Willkommen bitte Melden sie sich zur Umfrage an"+"\n");
                 dataOut.flush();
 
                 while (true) {
@@ -39,16 +39,25 @@ public class Serverthread extends Thread {
                             // if (Countdown.countdownStarter == 0) {
                             dataOut.writeBytes(d.get(i).text);
                             dataOut.flush();
-                            i++;
-                            if (i >=d.size()) {
-                                i = 0;
-                            }
+
+
                             //   if (Countdown.countdownStarter == 0) {
 
                             s = sockin.readLine();
                             System.out.println(s);
-
-
+                            if (s != null) {
+                                if(d.get(i).text.split(":")[1].equals("1")){
+                                    System.out.println("erste Frage");
+                                }else if(d.get(i).text.split(":")[1].equals("2")){
+                                    System.out.println("zweiter Fragentyp");
+                                }else if(d.get(i).text.split(":")[1].equals("3")){
+                                    System.out.println("dritte Fragentyp");
+                                }
+                            }
+                            i++;
+                            if (i >= d.size()) {
+                                i = 0;
+                            }
                             // }
 
                             //}
