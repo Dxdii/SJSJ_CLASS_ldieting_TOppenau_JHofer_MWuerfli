@@ -1,6 +1,9 @@
 package Server;
 
 import Modules.Frage;
+import Modules.JaNein;
+import Modules.Numerisch;
+import Modules.vonBis;
 
 import java.io.*;
 import java.net.Socket;
@@ -48,10 +51,20 @@ public class Serverthread extends Thread {
                             if (s != null) {
                                 if(d.get(i).text.split(":")[1].equals("1")){
                                     System.out.println("erste Frage");
+                                    if(s.equals("Ja")) {
+                                        JaNein a = new JaNein(d.get(i).text.split(":")[2],true);
+                                        new SaveToDatabase(a);
+                                    }else{
+                                        JaNein a = new JaNein(s,false);
+                                        new SaveToDatabase(a);
+                                    }
                                 }else if(d.get(i).text.split(":")[1].equals("2")){
                                     System.out.println("zweiter Fragentyp");
+                                  vonBis a = new vonBis(d.get(i).text.split(":")[2],Integer.valueOf(s));
+                                  new SaveToDatabase(a);
                                 }else if(d.get(i).text.split(":")[1].equals("3")){
                                     System.out.println("dritte Fragentyp");
+                                    new Numerisch(d.get(i).text.split(":")[1],Float.valueOf(s));
                                 }
                             }
                             i++;
