@@ -1,6 +1,9 @@
 package Auswerten;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -24,10 +27,14 @@ public class ControllerAuswerten {
     public TextField textMittelwert;
     public TextField textStandardabweichung;
 
+    public PieChart chartKreis;
+
     int index;
     Connection db = null;
 
     List<FragenAuswerten> fragenList = new ArrayList<>();
+
+    ObservableList<PieChart.Data> pieChartData;
 
     public void initialize() {
 
@@ -44,10 +51,12 @@ public class ControllerAuswerten {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM frage");
 
-            //List<Schueler> schuelerList = new ArrayList<>();
-            //ObservableList<Schueler> schuelerList = new ObservableList<Schueler>();
+            //List<FragenAuswerten> fragenList = new ArrayList<>();
+            //ObservableList<FragenAuswerten> fragenList = new ObservableList<FragenAuswerten>();
 
             fragenList.clear();   // ArrayList löschen
+
+            btnUpdate.setStyle("-fx-background-color: rgb(0,225,0);");
 
             while (rs.next()) {
                 FragenAuswerten frage = new FragenAuswerten();
@@ -56,7 +65,7 @@ public class ControllerAuswerten {
                 frage.setFrage(rs.getString("text"));
                 frage.setMin(rs.getInt("min"));
                 frage.setMax(rs.getInt("max"));
-                frage.setType(rs.getInt("type"));
+                frage.setType(rs.getInt("typ"));
 
                 fragenList.add(frage);
             }
@@ -64,9 +73,9 @@ public class ControllerAuswerten {
             rs.close();
             st.close();
 
-            //System.out.println(schuelerList.get(1).getVorname());
+            System.out.println(fragenList.get(1).getFrage());
 
-            listFrage.getItems().clear();
+            listFrage.getItems().clear();   // Einträge in der Liste löschen!
 
             fragenList.forEach(frage -> {
                 listFrage.getItems().add(frage.getFrage());
@@ -76,20 +85,82 @@ public class ControllerAuswerten {
                 throwables.printStackTrace();
                 System.err.println("Fehler beim Einlesen der Daten aus der Datenbank!");
                 btnUpdate.setText("Fehler DB!!!");
+                btnUpdate.setStyle("-fx-background-color: rgb(225,0,0);");
         }
     }
 
     public void btnAuswertenClicked(ActionEvent actionEvent) {
 
         System.out.println("Button Auswerten!");
+
+/*
+        pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Num1",7),
+                new PieChart.Data("Num2",14),
+                new PieChart.Data("Num3",2),
+                new PieChart.Data("Num4",5)
+            );
+
+
+        chartKreis.getData().clear();
+
+        chartKreis.getData().addAll(pieChartData);
+
+ */
+
+
     }
 
     public void listMouseClicked(MouseEvent mouseEvent) {
+
+        int type;
 
         index = listFrage.getSelectionModel().getSelectedIndex();
 
         System.out.println(index);  // ausgewählte Zeile
 
+        type = fragenList.get(index).getType();
+        System.out.println("Typ-Frage: " + type);
+
+
+        switch (type){
+            case 1:
+                System.out.println("Fragen-Typ => JA/NEIN");
+                pieChartData = FXCollections.observableArrayList(
+                        new PieChart.Data("JA",7),
+                        new PieChart.Data("NEIN",14)
+                );
+                break;
+
+            case 2:
+                System.out.println("Fragen-Typ => Min-Max");
+
+                break;
+
+            case 3:
+                System.out.println("Fragen-Typ => Nummer");
+
+                break;
+
+            default:
+                System.err.println("Fehler Fragen-Typ nicht bekannt!");
+                break;
+        }
+/*
+        pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Num1",7),
+                new PieChart.Data("Num2",14),
+                new PieChart.Data("Num3",2),
+                new PieChart.Data("Num4",5)
+        );
+
+
+ */
+
+
+        chartKreis.getData().clear();
+
+        chartKreis.getData().addAll(pieChartData);
 
     }
 
