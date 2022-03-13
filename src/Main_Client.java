@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Main_Client {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Socket socketServer = null;
@@ -26,26 +26,34 @@ public class Main_Client {
 
             PrintWriter out = new PrintWriter(socketServer.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socketServer.getInputStream()));
+            DataOutputStream dataOut = new DataOutputStream(socketServer.getOutputStream());
             //Eingabe-Reader/Ausgabe-Writer erzeugen:
 
             //Solange der User etwas eingibt (und danach Enter drückt), werden die Daten
             //zum Server geschickt. Eingabe von "X" beendet alles.
-            String textInput = null;
-            out.println("1234" + "\r\n" );
-            out.flush();
-            System.out.println("Test");
+            String userInput;
             System.out.println(in.readLine());
+            //while (in.readLine() != null) {
+                //out.println("1234" + "\n");
+                //out.flush();
+                dataOut.writeBytes("1234" + "\n");
+                dataOut.flush();
+                System.out.println("Test");
+                System.out.println(in.readLine());
+                System.out.println("ha");
+            //}
 
-            System.out.println("Test2");
+
+            /*System.out.println("Test2");
             while ( (textInput = reader.readLine() ) != null && !"e".equals(textInput))
             {
 
                 System.out.println(in.readLine());
 
 
-            }
+            }*/
             //User hat "e" eingegeben: Socket dichtmachen.
-            socketServer.close();
+            //socketServer.close();
         }
         catch (IOException e)
         {

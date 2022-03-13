@@ -16,3 +16,6 @@ Je nach dem welcher Fragetyp kommt
        => wichtig dafür, dass Client mit Controller für FX verbunden werden kann
        Client.fxml eingebunden
        Client.fxml mit Controller_Client.java verbunden => erstellen von Action Events
+
+09.03 Fehlersuche, warum der kein Text vom Server empfangen wird
+       => Fehlerursache: Serverseitiger Fehler, wurde am Ende der Stunde angepasst
