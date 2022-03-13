@@ -1,3 +1,4 @@
+package Auswerten;
 
 public class FragenAuswerten {
 

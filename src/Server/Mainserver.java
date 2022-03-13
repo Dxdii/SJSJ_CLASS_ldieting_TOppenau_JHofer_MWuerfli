@@ -25,7 +25,7 @@ public class Mainserver {
                 l = br.readLine();
             }
             br.close();
-            br = new BufferedReader(new FileReader(new File("Fragen.csv")));
+
 
 
             ServerSocket b = new ServerSocket(55555);
@@ -46,5 +46,7 @@ public class Mainserver {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }

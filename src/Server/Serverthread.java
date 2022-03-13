@@ -1,6 +1,9 @@
 package Server;
 
 import Modules.Frage;
+import Modules.JaNein;
+import Modules.Numerisch;
+import Modules.vonBis;
 
 import java.io.*;
 import java.net.Socket;
@@ -25,7 +28,7 @@ public class Serverthread extends Thread {
                 sockOut = socket.getOutputStream();
 
                 DataOutputStream dataOut = new DataOutputStream(sockOut);
-                dataOut.writeBytes("Willkommen bitte Melden sie sich zur Umfrage an");
+                dataOut.writeBytes("Willkommen bitte Melden sie sich zur Umfrage an" + "\n");
                 dataOut.flush();
 
                 while (true) {
@@ -39,14 +42,36 @@ public class Serverthread extends Thread {
                             // if (Countdown.countdownStarter == 0) {
                             dataOut.writeBytes(d.get(i).text);
                             dataOut.flush();
-                            i++;
+
 
                             //   if (Countdown.countdownStarter == 0) {
 
                             s = sockin.readLine();
                             System.out.println(s);
-
-
+                            if (s != null) {
+                                if (d.get(i).text.split(":")[1].equals("1")) {
+                                    System.out.println("erste Frage");
+                                    if (s.equals("Ja")) {
+                                        JaNein a = new JaNein(d.get(i).text.split(":")[2], true);
+                                        new SaveToDatabase(a);
+                                    } else {
+                                        JaNein a = new JaNein(s, false);
+                                        new SaveToDatabase(a);
+                                    }
+                                } else if (d.get(i).text.split(":")[1].equals("2")) {
+                                    System.out.println("zweiter Fragentyp");
+                                    vonBis a = new vonBis(d.get(i).text.split(":")[2], Integer.valueOf(s));
+                                    new SaveToDatabase(a);
+                                } else if (d.get(i).text.split(":")[1].equals("3")) {
+                                    System.out.println("dritte Fragentyp");
+                                    Numerisch a = new Numerisch(d.get(i).text.split(":")[1], Float.valueOf(s));
+                                    new SaveToDatabase(a);
+                                }
+                            }
+                            i++;
+                            if (i >= d.size()) {
+                                i = 0;
+                            }
                             // }
 
                             //}
