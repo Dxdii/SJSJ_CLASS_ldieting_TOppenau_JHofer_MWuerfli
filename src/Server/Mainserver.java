@@ -15,7 +15,7 @@ public class Mainserver {
 
             int i = 0;
             boolean running = true;
-
+// Auslesen der Fragen in die Fragen Klasse
             FileReader fr = new FileReader(new File("Fragen.csv"));
             BufferedReader br = new BufferedReader(fr);
             Vector<Frage> Questions = new Vector<>();
@@ -27,7 +27,7 @@ public class Mainserver {
             br.close();
 
 
-
+// Starten des Servers
             ServerSocket b = new ServerSocket(55555);
             Countdown d = new Countdown();
             d.start();
