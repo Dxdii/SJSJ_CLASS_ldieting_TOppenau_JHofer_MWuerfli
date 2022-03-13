@@ -1,12 +1,27 @@
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Objects;
 
-public class Main_Client {
+
+public class Main_Client extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main_Client.class.getResource("Client.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+    }
     public static void main(String[] args){
-
+        launch();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Socket socketServer = null;
         assert false;
@@ -24,7 +39,6 @@ public class Main_Client {
         try
         {
 
-            PrintWriter out = new PrintWriter(socketServer.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socketServer.getInputStream()));
             DataOutputStream dataOut = new DataOutputStream(socketServer.getOutputStream());
             //Eingabe-Reader/Ausgabe-Writer erzeugen:
@@ -34,13 +48,38 @@ public class Main_Client {
             String userInput;
             System.out.println(in.readLine());
             //while (in.readLine() != null) {
-                //out.println("1234" + "\n");
-                //out.flush();
-                dataOut.writeBytes("1234" + "\n");
-                dataOut.flush();
-                System.out.println("Test");
-                System.out.println(in.readLine());
-                System.out.println("ha");
+            //out.println("1234" + "\n");
+            //out.flush();
+            dataOut.writeBytes("1234" + "\n");
+            dataOut.flush();
+            System.out.println("Test");
+            String read;
+            while((read=in.readLine())!=null){
+                String[] readSplit = read.split(":");
+                if(Objects.equals(readSplit[1], "1")){
+                    System.out.println(read);
+                    System.out.println("Fragentyp1" + readSplit[0]);
+                    dataOut.writeBytes(readSplit[0]+ ":"+"ja" + "\n");
+                    dataOut.flush();
+                }else if(Objects.equals(readSplit[1], "2")){
+                    System.out.println(read);
+                    System.out.println("Fragentyp2-" + readSplit[0]);
+                    dataOut.writeBytes(readSplit[0]+ ":"+"1" + "\n");
+                    dataOut.flush();
+                }else if(Objects.equals(readSplit[1], "3")){
+                    System.out.println(read);
+                    System.out.println("Fragentyp3" + readSplit[0]);
+                    dataOut.writeBytes(readSplit[0]+ ":"+"1.43" + "\n");
+                    dataOut.flush();
+                }
+
+
+
+            }
+            dataOut.writeBytes("1" + "\n");
+            dataOut.flush();
+            System.out.println(in.readLine());
+
             //}
 
 
@@ -62,41 +101,3 @@ public class Main_Client {
         }
     }
 }
-
-
-
-
-
-
-/*import java.io.*;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
-public class Main_Client {
-    public static void main(String[] args) {
-        Socket socket = null;
-        try
-        {
-            // getting localhost ip
-            InetAddress ip = InetAddress.getByName("localhost");
-
-            // establish the connection with server port 55555
-            Socket s = new Socket(ip, 55555);
-
-            // obtaining input and out streams
-            DataInputStream dis = new DataInputStream(s.getInputStream());
-            System.out.println(dis);
-            DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-            System.out.println(dos);
-
-            dis.close();
-            dos.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-}
-
-*/
