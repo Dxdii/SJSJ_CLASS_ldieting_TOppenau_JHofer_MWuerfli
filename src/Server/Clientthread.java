@@ -28,11 +28,13 @@ public class Clientthread extends Thread {
 
        */
             try {
-
+// Akzeptieren der vereinzelten Teilnehmer Multithreading
                 Socket cs = socket.accept();
                 Serverthread s = new Serverthread(cs, e);
                 s.start();
-
+                if (!s.frunning) {
+                    close();
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
