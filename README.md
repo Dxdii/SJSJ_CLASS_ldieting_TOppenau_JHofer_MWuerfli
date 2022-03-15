@@ -22,6 +22,9 @@ Client
 #libs
 Einstellungen für das Programm.
 Javafx Library und Postgres Lib bitte in das Projekt hinzufügen.
+#ServerPassswort/Serverport
+Port: 55555
+Pw:1234
 # Zugang zu den Tabellen
 user: reader
 passwort: reader
