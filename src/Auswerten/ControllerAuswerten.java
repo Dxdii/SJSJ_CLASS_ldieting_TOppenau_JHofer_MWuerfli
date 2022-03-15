@@ -37,7 +37,7 @@ public class ControllerAuswerten {
     ObservableList<PieChart.Data> pieChartData;
 
     public void initialize() {
-
+        // Verbindung zu Datenbank herstellen beim Aufrufen der GUI!
         ConnectDatabaseAuswerten database = new ConnectDatabaseAuswerten();
         db = database.getConnectToDatabase();
 
@@ -105,15 +105,16 @@ public class ControllerAuswerten {
         chartKreis.getData().clear();
 
         chartKreis.getData().addAll(pieChartData);
-
  */
-
 
     }
 
     public void listMouseClicked(MouseEvent mouseEvent) {
 
         int type;
+
+        int countja = 0;
+        int countnein = 0;
 
         index = listFrage.getSelectionModel().getSelectedIndex();
 
@@ -126,10 +127,47 @@ public class ControllerAuswerten {
         switch (type){
             case 1:
                 System.out.println("Fragen-Typ => JA/NEIN");
+                /*
+                SELECT value
+                FROM ajanein
+                JOIN antwort a on a.kennummer = ajanein.akn
+                WHERE kennummer = 1;
+                 */
+
+                Statement st = null;
+                try {
+                    st = db.createStatement();
+                    ResultSet rs = st.executeQuery("SELECT value\n" +
+                            "                FROM ajanein\n" +
+                            "                JOIN antwort a on a.kennummer = ajanein.akn\n" +
+                            "                WHERE kennummer = 1");
+
+                    while (rs.next()) {
+                        if (rs.getBoolean("value") == true) {
+                            countja++;
+                        } else if (rs.getBoolean("value") == false) {
+                            countnein++;
+                        }
+
+                    }
+
+                    rs.close();
+                    st.close();
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    System.err.println("Fehler beim Auslesen der Antworten JA/NEIN!");
+                }
+
+
+
                 pieChartData = FXCollections.observableArrayList(
                         new PieChart.Data("JA",7),
                         new PieChart.Data("NEIN",14)
                 );
+
+
+
                 break;
 
             case 2:
