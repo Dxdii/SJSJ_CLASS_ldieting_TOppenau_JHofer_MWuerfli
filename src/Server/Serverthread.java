@@ -1,6 +1,7 @@
 package Server;
 
 import Modules.*;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Vector;
@@ -36,7 +37,7 @@ public class Serverthread extends Thread {
                         while (fragezeit) {
 
                             // if (Countdown.countdownStarter == 0) {
-                            dataOut.writeBytes(d.get(i).text+"\n");
+                            dataOut.writeBytes(d.get(i).text + "\n");
                             dataOut.flush();
 
 

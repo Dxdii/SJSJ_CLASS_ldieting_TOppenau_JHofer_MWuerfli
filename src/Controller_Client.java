@@ -1,3 +1,4 @@
+import Server.Mainserver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -25,7 +26,7 @@ public class Controller_Client {
 
 
         try {
-            socketServer = new Socket("localhost", 55555);
+            socketServer = new Socket("localhost", Mainserver.Port);
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host");
         } catch (IOException e) {

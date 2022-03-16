@@ -28,7 +28,7 @@ public class Clientthread extends Thread {
 
        */
             try {
-// Akzeptieren der vereinzelten Teilnehmer Multithreading
+                // Akzeptieren der vereinzelten Teilnehmer Multithreading
                 Socket cs = socket.accept();
                 Serverthread s = new Serverthread(cs, e);
                 s.start();
