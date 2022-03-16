@@ -27,3 +27,10 @@ Error initializing QuantumRenderer: no suitable pipeline found" beim Versuch Jav
 => umsteigen auf 1.8 JDK (VM Options nicht mehr nötig)
 
 Anpassen der Grafischen Oberfläche
+
+
+16.03 GUI Konzept ändern => Fragen über Modalfenster => wenn ok geklickt werden
+die eingegebenen Werte zurückgeschickt und dem Server zurückgeschickt. Das Modalfenster
+muss je nach Frage angepasst werden. Nach dem Zurücksenden wird die nächste Frage gesendet.
+
+Der Port wurde einmal über das ganze Projekt definiert

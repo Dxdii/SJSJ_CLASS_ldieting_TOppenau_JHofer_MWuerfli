@@ -1,6 +1,8 @@
 import Server.Mainserver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -18,13 +20,15 @@ public class Controller_Client {
     @FXML
     private GridPane gridPane;
     private TextArea textArea;
+    @FXML
+    private GridPane projectlist;
 
-    public void Start(ActionEvent actionevent) {
+    public void Start(ActionEvent actionevent) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Socket socketServer = null;
         assert false;
-
-
+//FX Anwendung zu modal ändern
+// Serversocket einmal definieren
         try {
             socketServer = new Socket("localhost", Mainserver.Port);
         } catch (UnknownHostException e) {
@@ -34,51 +38,58 @@ public class Controller_Client {
         }
         System.out.println("Connected");
 
+        DataOutputStream dataOut = null;
+        BufferedReader in = null;
         try {
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(socketServer.getInputStream()));
-            DataOutputStream dataOut = new DataOutputStream(socketServer.getOutputStream());
+            in = new BufferedReader(new InputStreamReader(socketServer.getInputStream()));
+            dataOut = new DataOutputStream(socketServer.getOutputStream());
             //Eingabe-Reader/Ausgabe-Writer erzeugen:
 
-            //Solange der User etwas eingibt (und danach Enter drückt), werden die Daten
-            //zum Server geschickt. Eingabe von "X" beendet alles.
-            String userInput;
-            System.out.println(in.readLine());
-            //while (in.readLine() != null) {
-            //out.println("1234" + "\n");
-            //out.flush();
-            dataOut.writeBytes("1234" + "\n");
-            dataOut.flush();
-            System.out.println("Test");
-            String read;
-            while ((read = in.readLine()) != null) {
-                System.out.println("hallo");
-                //SetupDisplay(read);
-                String[] readSplit = read.split(":");
-                if (Objects.equals(readSplit[1], "1")) {
-                    System.out.println(read);
-                    System.out.println("Fragentyp1" + readSplit[0]);
-                    dataOut.writeBytes(readSplit[0] + ":" + "ja" + "\n");
-                    dataOut.flush();
-                } else if (Objects.equals(readSplit[1], "2")) {
-                    System.out.println(read);
-                    System.out.println("Fragentyp2-" + readSplit[0]);
-                    dataOut.writeBytes(readSplit[0] + ":" + "1" + "\n");
-                    dataOut.flush();
-                } else if (Objects.equals(readSplit[1], "3")) {
-                    System.out.println(read);
-                    System.out.println("Fragentyp3" + readSplit[0]);
-                    dataOut.writeBytes(readSplit[0] + ":" + "1.43" + "\n");
-                    dataOut.flush();
-                }
 
+            //Button btn = (Button) fxmlLoader.getNamespace().get("buttonStart");
+            projectlist.getChildren().remove("buttonStart");
 
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        String userInput;
+        System.out.println(in.readLine());
+        //while (in.readLine() != null) {
+        //out.println("1234" + "\n");
+        //out.flush();
+        dataOut.writeBytes("1234" + "\n");
+        dataOut.flush();
+        System.out.println("Test");
+        String read;
+        while ((read = in.readLine()) != null) {
+            System.out.println("hallo");
+            //SetupDisplay(read);
+            String[] readSplit = read.split(":");
+            if (Objects.equals(readSplit[1], "1")) {
+                System.out.println(read);
+                System.out.println("Fragentyp1" + readSplit[0]);
+                dataOut.writeBytes(readSplit[0] + ":" + "ja" + "\n");
+                dataOut.flush();
+            } else if (Objects.equals(readSplit[1], "2")) {
+                System.out.println(read);
+                System.out.println("Fragentyp2-" + readSplit[0]);
+                dataOut.writeBytes(readSplit[0] + ":" + "1" + "\n");
+                dataOut.flush();
+            } else if (Objects.equals(readSplit[1], "3")) {
+                System.out.println(read);
+                System.out.println("Fragentyp3" + readSplit[0]);
+                dataOut.writeBytes(readSplit[0] + ":" + "1.43" + "\n");
+                dataOut.flush();
             }
-            dataOut.writeBytes("1" + "\n");
-            dataOut.flush();
-            System.out.println(in.readLine());
 
-            //}
+
+        }
+        dataOut.writeBytes("1" + "\n");
+        dataOut.flush();
+        System.out.println(in.readLine());
+
+        //}
 
 
             /*System.out.println("Test2");
@@ -89,13 +100,13 @@ public class Controller_Client {
 
 
             }*/
-            //User hat "e" eingegeben: Socket dichtmachen.
-            //socketServer.close();
-        } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
-            System.exit(-1);
-        }
+        //User hat "e" eingegeben: Socket dichtmachen.
+        //socketServer.close();
     }
+
+
+
+
 
     public void AddChoice() {
 
