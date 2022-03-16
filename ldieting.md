@@ -8,3 +8,4 @@ Server.Countdown Server geaddet Multi threading und Grundgerüst Server Passwort
 JAvafx implementiert eigene Packages installation Postgres und Java fx Bibliotheken
 
 15.03: Krank
+16:03: Besprechung über Projekt und Server features erweitert.
