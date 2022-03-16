@@ -112,17 +112,16 @@ public class ControllerAuswerten {
     public void listMouseClicked(MouseEvent mouseEvent) {
 
         int type;
-
+        Statement st = null;
         int countja = 0;
         int countnein = 0;
 
         index = listFrage.getSelectionModel().getSelectedIndex();
 
-        System.out.println(index);  // ausgewählte Zeile
+        System.out.println("Zeile ausgewaehlt: " + index);  // ausgewählte Zeile
 
         type = fragenList.get(index).getType();
         System.out.println("Typ-Frage: " + type);
-
 
         switch (type){
             case 1:
@@ -133,23 +132,27 @@ public class ControllerAuswerten {
                 JOIN antwort a on a.kennummer = ajanein.akn
                 WHERE kennummer = 1;
                  */
-
-                Statement st = null;
+                st = null;
                 try {
                     st = db.createStatement();
                     ResultSet rs = st.executeQuery("SELECT value\n" +
                             "                FROM ajanein\n" +
-                            "                JOIN antwort a on a.kennummer = ajanein.akn\n" +
-                            "                WHERE kennummer = 1");
-
+                            "                JOIN antwort a on a.kennummer = ajanein.akn\n");
                     while (rs.next()) {
                         if (rs.getBoolean("value") == true) {
                             countja++;
                         } else if (rs.getBoolean("value") == false) {
                             countnein++;
                         }
-
                     }
+
+                    System.out.println("Ja: " + countja);
+                    System.out.println("Nein: " + countnein);
+
+                    pieChartData = FXCollections.observableArrayList(
+                            new PieChart.Data("JA",countja),
+                            new PieChart.Data("NEIN",countnein)
+                    );
 
                     rs.close();
                     st.close();
@@ -159,31 +162,79 @@ public class ControllerAuswerten {
                     System.err.println("Fehler beim Auslesen der Antworten JA/NEIN!");
                 }
 
-
-
-                pieChartData = FXCollections.observableArrayList(
-                        new PieChart.Data("JA",7),
-                        new PieChart.Data("NEIN",14)
-                );
-
-
-
                 break;
 
             case 2:
                 System.out.println("Fragen-Typ => Min-Max");
+
+                st = null;
+                try {
+                    st = db.createStatement();
+                    ResultSet rs = st.executeQuery("SELECT value\n" +
+                            "                FROM avonbis\n" +
+                            "                JOIN antwort a on a.kennummer = avonbis.akn\n");
+                    while (rs.next()) {
+                        System.out.println("Min-Max Wert: " + rs.getInt("value"));
+
+                    }
+
+
+                    pieChartData = FXCollections.observableArrayList(
+                            new PieChart.Data("1",1),
+                            new PieChart.Data("3",1),
+                            new PieChart.Data("1",1)
+                    );
+
+                    //pieChartData.set(1,2);
+
+                    rs.close();
+                    st.close();
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    System.err.println("Fehler beim Auslesen der Antworten Min-Max!");
+                }
+
 
                 break;
 
             case 3:
                 System.out.println("Fragen-Typ => Nummer");
 
+                st = null;
+                try {
+                    st = db.createStatement();
+                    ResultSet rs = st.executeQuery("SELECT value\n" +
+                            "                FROM anumerisch\n" +
+                            "                JOIN antwort a on a.kennummer = anumerisch.akn\n");
+                    while (rs.next()) {
+                        System.out.println("Test-Num: " + rs.getInt("value"));
+
+                    }
+
+
+                    pieChartData = FXCollections.observableArrayList(
+                            new PieChart.Data("Wert1",4),
+                            new PieChart.Data("Wert2",15)
+                    );
+
+
+                    rs.close();
+                    st.close();
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    System.err.println("Fehler beim Auslesen der Antworten Nummer!");
+                }
+
                 break;
 
             default:
+                System.out.println("Fragentyp nicht bekannt! Keine Auswertung möglich!");
                 System.err.println("Fehler Fragen-Typ nicht bekannt!");
                 break;
         }
+
 /*
         pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Num1",7),
@@ -191,13 +242,10 @@ public class ControllerAuswerten {
                 new PieChart.Data("Num3",2),
                 new PieChart.Data("Num4",5)
         );
-
-
  */
 
-
+        // Diagramm ertsellen:
         chartKreis.getData().clear();
-
         chartKreis.getData().addAll(pieChartData);
 
     }
@@ -210,6 +258,5 @@ public class ControllerAuswerten {
 
     public void listStart(ListView.EditEvent editEvent) {
     }
-
 
 }

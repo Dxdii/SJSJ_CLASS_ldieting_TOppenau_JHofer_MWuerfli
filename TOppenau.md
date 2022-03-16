@@ -16,3 +16,7 @@ PieChart erstsellen und mit Testwerten aus einer ObservableList befüllen und an
 
 15.03.2022: SQL-Datenbank Abfrage Fragentyp JA/NEIN und anschließend auswerten der beiden Ergebnisse 
 und anschließend in Kreisdiagramm anzeigen.
+
+16.03.2022: Abfrage der Min-MAx Werte bzw. Numerische Werte.
+Funktioniert mit den Testwerten nicht so wie gewünscht.
+Fragentyp gibt es 1-4, 1: JA/NEIN; 2: Min-Max; 3: Nummer; 4: noch unklar
