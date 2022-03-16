@@ -28,8 +28,10 @@ public class ConnectDatabaseAuswerten {
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            System.err.println("SQL-Datenbank Driver nicht gefunden!");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            System.err.println("Verbindung mit DB fehlgeschlagen!");
         } finally {
             return db;
         }
