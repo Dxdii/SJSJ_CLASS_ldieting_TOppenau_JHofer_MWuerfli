@@ -1,10 +1,6 @@
 package Server;
 
-import Modules.Frage;
-import Modules.JaNein;
-import Modules.Numerisch;
-import Modules.vonBis;
-
+import Modules.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.Vector;

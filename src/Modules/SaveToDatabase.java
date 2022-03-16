@@ -1,4 +1,4 @@
-package Server;
+package Modules;
 
 import Modules.JaNein;
 import Modules.Numerisch;

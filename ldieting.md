@@ -6,3 +6,5 @@ Server
 8.03:
 Server.Countdown Server geaddet Multi threading und Grundgerüst Server Passwort 1234
 JAvafx implementiert eigene Packages installation Postgres und Java fx Bibliotheken
+
+15.03: Krank

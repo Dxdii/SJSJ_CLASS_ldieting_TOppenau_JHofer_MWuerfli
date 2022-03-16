@@ -33,8 +33,9 @@ public class Mainserver {
             d.start();
             Clientthread z = new Clientthread(b,Questions);
             z.start();
-
             do {
+
+
 
                 if (z.frunning == false) {
                     running = false;
