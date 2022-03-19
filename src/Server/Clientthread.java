@@ -12,9 +12,11 @@ public class Clientthread extends Thread {
     boolean frunning = true;
     boolean anmeldung = true;
     Vector<Frage> e;
+    Countdown f;
 
-    public Clientthread(ServerSocket socket, Vector<Frage> a) {
+    public Clientthread(ServerSocket socket, Vector<Frage> a, Countdown d) {
         e = a;
+        f = d;
         this.socket = socket;
     }
 
@@ -27,36 +29,41 @@ public class Clientthread extends Thread {
             if (anmeldung) {
 
        */
-            try {
-                // Akzeptieren der vereinzelten Teilnehmer Multithreading
-                Socket cs = socket.accept();
-                Serverthread s = new Serverthread(cs, e);
-                s.start();
-                if (!s.frunning) {
-                    close();
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-           /* } else {
+            if (f.frunning) {
                 try {
-
+                    // Akzeptieren der vereinzelten Teilnehmer Multithreading
                     Socket cs = socket.accept();
-                    DataOutputStream dataOut = new DataOutputStream(cs.getOutputStream());
-                    dataOut.writeBytes("Zu Spaet");
-                    dataOut.flush();
+                    if (f.frunning) {
+                        Serverthread s = new Serverthread(cs, e, f);
+                        s.start();
+
+                        if (!s.frunning) {
+                            close();
+                            socket.close();
+                        }
+                    } else {
+
+                        try {
+
+                            cs = socket.accept();
+                            DataOutputStream dataOut = new DataOutputStream(cs.getOutputStream());
+                            dataOut.writeBytes("Zu Spaet");
+                            dataOut.flush();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
+
             }
-*/
+
+
         }
-
-
     }
 
     public void close() {
