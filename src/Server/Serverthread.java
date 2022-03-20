@@ -64,8 +64,7 @@ public class Serverthread extends Thread {
                                 }else{
                                     Thread.sleep(cd.countdownStarter * 1000);
                                 }
-                                dataOut.writeBytes("\r" + "Nächste Frage:" + "\n");
-                                dataOut.flush();
+
                                 Thread.sleep(1000);
                             }
                             //Bei Antwort erkennung welcher Fragentyp es ist + Schreibvorgang auf DB
