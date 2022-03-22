@@ -161,7 +161,6 @@ public class ControllerAuswerten {
                     throwables.printStackTrace();
                     System.err.println("Fehler beim Auslesen der Antworten JA/NEIN!");
                 }
-
                 break;
 
             case 2:
@@ -178,7 +177,6 @@ public class ControllerAuswerten {
 
                     }
 
-
                     pieChartData = FXCollections.observableArrayList(
                             new PieChart.Data("1",1),
                             new PieChart.Data("3",1),
@@ -189,10 +187,30 @@ public class ControllerAuswerten {
 
                     rs.close();
                     st.close();
-
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                     System.err.println("Fehler beim Auslesen der Antworten Min-Max!");
+                }
+
+
+                st = null;
+                try {
+                    st = db.createStatement();
+                    ResultSet rsavg = st.executeQuery("SELECT avg(value)::FLOAT AS mittelwert\n" +
+                            "FROM avonbis\n" +
+                            "JOIN antwort a on a.kennummer = avonbis.akn;");
+
+                    while (rsavg.next()) {
+                        System.out.println("Mittelwert: " + rsavg.getFloat("mittelwert"));
+                        //ystem.out.println(rsavg);
+                        textMittelwert.setText(String.valueOf(rsavg.getFloat("mittelwert")));
+                    }
+
+                    rsavg.close();
+                    st.close();
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
 
 
