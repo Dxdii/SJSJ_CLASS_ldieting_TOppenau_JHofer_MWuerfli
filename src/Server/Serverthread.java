@@ -1,9 +1,6 @@
 package Server;
 
-import Modules.Frage;
-import Modules.JaNein;
-import Modules.Numerisch;
-import Modules.vonBis;
+import Modules.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,10 +10,12 @@ public class Serverthread extends Thread {
     private Socket socket;
     boolean frunning = true;
     Vector<Frage> d;
+    Countdown login;
 
-    public Serverthread(Socket sockets, Vector<Frage> a) {
+    public Serverthread(Socket sockets, Vector<Frage> a, Countdown t) {
         this.socket = sockets;
         d = a;
+        login = t;
     }
 
     @Override
@@ -29,25 +28,45 @@ public class Serverthread extends Thread {
 
                 DataOutputStream dataOut = new DataOutputStream(sockOut);
                 BufferedReader sockin = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                dataOut.writeBytes("Bitte geben sie das Passwort fuer die Umfrage ein" + "\n");
+                dataOut.flush();
 
-                while (true) {
-                    dataOut.writeBytes("Willkommen bitte Melden sie sich zur Umfrage an" + "\n");
-                    dataOut.flush();
-                    String s = sockin.readLine();
-                    if (s.equals("1234")) {
+                String s = sockin.readLine();
+                if (s.equals("1234")) {
+                    if (login.frunning) {
+                        Thread.sleep(login.countdownStarter * 1000 - 3000);
+                        dataOut.writeBytes("\r" + "3" + "\n");
+                        dataOut.flush();
+                        Thread.sleep(1000);
+                        dataOut.writeBytes("\r" + "2" + "\n");
+                        dataOut.flush();
+                        Thread.sleep(1000);
+                        dataOut.writeBytes("\r" + "1" + "\n");
+                        dataOut.flush();
+                        Thread.sleep(1000);
+                    }
+                    int i = 0;
                         boolean fragezeit = true;
-                        int i = 0;
+
                         while (fragezeit) {
+                            Countdown cd = new Countdown();
+                            cd.start();
 
                             // if (Countdown.countdownStarter == 0) {
-                            dataOut.writeBytes(d.get(i).text+"\n");
+                            dataOut.writeBytes("\r" + d.get(i).text + "\n");
                             dataOut.flush();
+                            while (cd.frunning) {
+                                //   if (Countdown.countdownStarter == 0) {
+                                s = sockin.readLine();
+                                System.out.println(s);
+                                if(cd.countdownStarter * 1000 - 1000>0) {
+                                    Thread.sleep(cd.countdownStarter * 1000 - 1000);
+                                }else{
+                                    Thread.sleep(cd.countdownStarter * 1000);
+                                }
 
-
-                            //   if (Countdown.countdownStarter == 0) {
-
-                            s = sockin.readLine();
-                            System.out.println(s);
+                                Thread.sleep(1000);
+                            }
                             //Bei Antwort erkennung welcher Fragentyp es ist + Schreibvorgang auf DB
                             if (s != "") {
                                 //1Typ
@@ -73,11 +92,13 @@ public class Serverthread extends Thread {
                                     new SaveToDatabase(a);
                                 }
                             }
+
                             //erhoehung für naechste Frage
                             i++;
                             if (i >= d.size()) {
-                                i = 0;
                                 fragezeit = false;
+                                dataOut.writeBytes("Danke fuer ihre Teilnahme" + "\n");
+                                dataOut.flush();
                                 close();
                             }
                             // }
@@ -86,10 +107,13 @@ public class Serverthread extends Thread {
 
 
                         }
-                    }
+
                 }
 
+
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 

@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 
 public class Countdown extends Thread{
-    public static int countdownStarter = 20;
+    public int countdownStarter ;
 public boolean frunning = true;
     public Countdown() {
         countdownStarter = 20;

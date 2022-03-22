@@ -19,3 +19,18 @@ Je nach dem welcher Fragetyp kommt
 
 09.03 Fehlersuche, warum der kein Text vom Server empfangen wird
        => Fehlerursache: Serverseitiger Fehler, wurde am Ende der Stunde angepasst
+       Client Verbindung Consolenanwendung funktioniert => erweitern auf javafx
+
+15.03 Fehler: "Graphics Device initialization failed for :  d3d, sw
+Error initializing QuantumRenderer: no suitable pipeline found" beim Versuch JavaFX einzubinden
+
+=> umsteigen auf 1.8 JDK (VM Options nicht mehr nötig)
+
+Anpassen der Grafischen Oberfläche
+
+
+16.03 GUI Konzept ändern => Fragen über Modalfenster => wenn ok geklickt werden
+die eingegebenen Werte zurückgeschickt und dem Server zurückgeschickt. Das Modalfenster
+muss je nach Frage angepasst werden. Nach dem Zurücksenden wird die nächste Frage gesendet.
+
+Der Port wurde einmal über das ganze Projekt definiert
