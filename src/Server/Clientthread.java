@@ -46,8 +46,8 @@ public class Clientthread extends Thread {
                         try {
 
                             cs = socket.accept();
-                            DataOutputStream dataOut = new DataOutputStream(cs.getOutputStream());
-                            dataOut.writeBytes("Zu Spaet");
+                            BufferedWriter dataOut = new BufferedWriter(new OutputStreamWriter(cs.getOutputStream()));
+                            dataOut.write("Zu Spaet");
                             dataOut.flush();
                         } catch (IOException e) {
                             e.printStackTrace();
