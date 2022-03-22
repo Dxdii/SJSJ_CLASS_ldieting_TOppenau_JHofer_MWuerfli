@@ -16,7 +16,7 @@ public class ConnectDatabaseAuswerten {
             Class.forName("org.postgresql.Driver");
 
             // Aufbau der Verbindung zur DB
-            db = DriverManager.getConnection("jdbc:postgresql://xserv:5432/jhofer",
+            db = DriverManager.getConnection("jdbc:postgresql://localhost/jhofer",
                     "reader", "reader");
 
                     /* SSH-Tunnel:
