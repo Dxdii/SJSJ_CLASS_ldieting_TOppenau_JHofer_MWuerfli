@@ -4,14 +4,10 @@ import Server.Mainserver;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,10 +16,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 //public class Controller_Client implements Initializable {
 public class Controller_Client {
@@ -36,7 +30,6 @@ public class Controller_Client {
     //@Override
     //public void initialize(URL location, ResourceBundle resources) {
     public void Start(ActionEvent event) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Socket socketServer = null;
         assert false;
 
@@ -72,7 +65,7 @@ public class Controller_Client {
             dataOut.writeBytes("1234" + "\n");
             dataOut.flush();
             System.out.println("Test");
-            System.out.println(in.readLine());
+            //System.out.println(in.readLine());
             String read;
             int i=0;
             //while ((read = in.readLine()) != "Ende") {
@@ -82,10 +75,19 @@ public class Controller_Client {
 
                 do {
                     read = in.readLine();
+                    System.out.println("Checkung");
                 }while(read == null);
                 System.out.println(read);
+
+                if(!read.contains(":") && read.length()>3){
+                    read = "1:ende";
+                }
                 //SetupDisplay(read);
+                // sicherheitscheck
+
                 String[] readSplit = read.split(":");
+
+
 
                 if (Objects.equals(readSplit[1], "1")) {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ1.fxml"));
@@ -118,7 +120,8 @@ public class Controller_Client {
                     stage.setScene(scene);
                     stage.showAndWait();
                     System.out.println(read + " & " + dialogController2.Slide());
-                    dataOut.writeBytes(readSplit[0] + ":" + dialogController2.Slide() + "\n");
+                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController2.Slide() + "\n");
+                    dataOut.writeBytes(dialogController2.Slide() + "\n");
                     dataOut.flush();
                     System.out.println("Fragentyp2-" + readSplit[0]);
 
@@ -137,13 +140,11 @@ public class Controller_Client {
                     System.out.println("Fragentyp3" + readSplit[0]);
                     dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
                     dataOut.flush();
+                }else if(Objects.equals(readSplit[1], "ende")){
+                    i=10;
                 }
-
-
             }
-            dataOut.writeBytes("1" + "\n");
-            dataOut.flush();
-            System.out.println(in.readLine());
+            System.out.println("Ende");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

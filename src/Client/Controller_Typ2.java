@@ -24,8 +24,8 @@ public class Controller_Typ2{
     public void SetMax(Integer max){
         slide.setMax(max);
     }
-    public String Slide(){
-        return String.valueOf(slide.getValue());
+    public Integer Slide(){
+        return (int) slide.getValue();
     }
     public void NextQuestion(ActionEvent event){
         closeStage(event);
@@ -36,5 +36,6 @@ public class Controller_Typ2{
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
     }
+
 
 }

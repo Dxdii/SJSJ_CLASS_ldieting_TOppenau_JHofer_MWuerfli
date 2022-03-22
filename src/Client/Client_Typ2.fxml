@@ -17,7 +17,16 @@
                     <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                             <children>
-                                <Slider fx:id="slide" layoutX="39.0" layoutY="30.0" prefHeight="14.0" prefWidth="253.0" />
+                                <Slider fx:id="slide" blockIncrement="1.0"
+                                        cache="true"
+                                        majorTickUnit="1.0"
+                                        max="4.0"
+                                        min="1.0"
+                                        minorTickCount="0"
+                                        showTickLabels="true"
+                                        showTickMarks="true"
+                                        snapToTicks="true"
+                                        value="1.0" layoutX="39.0" layoutY="30.0" prefHeight="14.0" prefWidth="253.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

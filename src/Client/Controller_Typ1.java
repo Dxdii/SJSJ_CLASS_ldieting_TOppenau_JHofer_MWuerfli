@@ -4,13 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
 public class Controller_Typ1{
     @FXML
-    private RadioButton ja;
+    private RadioButton Ja;
     @FXML
     private Label heading;
     @FXML
@@ -25,7 +24,7 @@ public class Controller_Typ1{
     }
     public void NextQuestion(ActionEvent event){
         ToggleGroup group = new ToggleGroup();
-        ja.setToggleGroup(group);
+        Ja.setToggleGroup(group);
         nein.setToggleGroup(group);
         String[] str = String.valueOf(group.getSelectedToggle()).split("'");
         select = str[1];

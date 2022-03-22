@@ -36,14 +36,14 @@ public class Serverthread extends Thread {
                 if (s.equals("1234")) {
                     if (login.frunning) {
                         Thread.sleep(login.countdownStarter * 1000 - 3000);
-                        dataOut.write( "3" + "\n");
-                        dataOut.flush();
+                        //dataOut.write( "3" + "\n");
+                        //dataOut.flush();
                         Thread.sleep(1000);
-                        dataOut.write("2" + "\n");
-                        dataOut.flush();
+                        //dataOut.write("2" + "\n");
+                        //dataOut.flush();
                         Thread.sleep(1000);
-                        dataOut.write("1" + "\n");
-                        dataOut.flush();
+                        //dataOut.write("1" + "\n");
+                        //dataOut.flush();
                         Thread.sleep(1000);
                     }
                     int i = 0;
