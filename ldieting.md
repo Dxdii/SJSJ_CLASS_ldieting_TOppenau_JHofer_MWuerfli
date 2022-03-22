@@ -8,6 +8,8 @@ Server.Countdown Server geaddet Multi threading und Grundgerüst Server Passwort
 JAvafx implementiert eigene Packages installation Postgres und Java fx Bibliotheken
 
 15.03: Krank
+
 16:03: Besprechung über Projekt und Server features erweitert.
+
 22:03: Mainserver umgeschrieben für die Nummerierung der Fragen. Bufferedwriter statt Dataoutpustream Text \r zerstört Würflingers
-auslesung deswegen entfernt
+       auslesung deswegen entfernt.
