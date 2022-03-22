@@ -138,7 +138,8 @@ public class Controller_Client {
                     stage.showAndWait();
                     System.out.println(read  + " & " + dialogController3.Text());
                     System.out.println("Fragentyp3" + readSplit[0]);
-                    dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
+                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
+                    dataOut.writeBytes(dialogController3.Text() + "\n");
                     dataOut.flush();
                 }else if(Objects.equals(readSplit[1], "ende")){
                     i=10;
