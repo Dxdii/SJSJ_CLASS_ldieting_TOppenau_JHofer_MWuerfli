@@ -1,12 +1,14 @@
 package Server;
 
 import Modules.Frage;
+import Modules.SaveToDatabase;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class Mainserver {
@@ -24,11 +26,14 @@ public class Mainserver {
             Vector<Frage> Questions = new Vector<>();
             String l = br.readLine();
             while (l != null) {
-                Questions.add(new Frage(l));
+                Questions.add(new Frage(l, i));
                 l = br.readLine();
+                i++;
             }
             br.close();
+            i = 0;
 
+                new SaveToDatabase(Questions);
 
             // Starten des Servers
             ServerSocket b = new ServerSocket(Port);
@@ -41,6 +46,8 @@ public class Mainserver {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

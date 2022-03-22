@@ -2,9 +2,10 @@ package Modules;
 
 public class Frage {
    public String text;
-   int Kennummer;
+   public int Kennummer;
 
-    public Frage(String s) {
+    public Frage(String s, int knnmmr) {
         text = s;
+        Kennummer = knnmmr;
     }
 }
