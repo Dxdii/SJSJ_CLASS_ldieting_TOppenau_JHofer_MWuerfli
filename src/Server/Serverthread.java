@@ -4,6 +4,7 @@ import Modules.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.Vector;
 
 public class Serverthread extends Thread {
@@ -114,6 +115,8 @@ public class Serverthread extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 
