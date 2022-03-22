@@ -5,7 +5,7 @@ import Modules.Numerisch;
 import Modules.vonBis;
 
 import Auswerten.ConnectDatabaseAuswerten;
-import com.sun.jdi.IntegerValue;
+//import com.sun.jdi.IntegerValue;
 
 import java.sql.*;
 import java.util.Vector;
