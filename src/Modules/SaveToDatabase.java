@@ -3,6 +3,7 @@ package Modules;
 import Modules.JaNein;
 import Modules.Numerisch;
 import Modules.vonBis;
+
 import Auswerten.ConnectDatabaseAuswerten;
 import com.sun.jdi.IntegerValue;
 
@@ -23,14 +24,14 @@ public class SaveToDatabase {
         sttmnt.executeUpdate("INSERT INTO ajanein values (" + i + awnser.value + ")");
     }
     public SaveToDatabase(Numerisch awnser){
-
     }
-    public SaveToDatabase(vonBis awnser){
+    public SaveToDatabase(vonBis awnser) {
 
-    }
-
+        }
     public static void main(String[] args) throws SQLException {
         JaNein j1 = new JaNein("Frage X", true);
         SaveToDatabase s = new SaveToDatabase(j1);
     }
+
 }
+
