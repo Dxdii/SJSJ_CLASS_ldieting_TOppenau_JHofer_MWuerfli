@@ -33,8 +33,11 @@ Anpassen der Grafischen Oberfläche
 die eingegebenen Werte zurückgeschickt und dem Server zurückgeschickt. Das Modalfenster
 muss je nach Frage angepasst werden. Nach dem Zurücksenden wird die nächste Frage gesendet.
 
-Der Port wurde einmal über das ganze Projekt definiert
+Der Port wurde einmal über das gesammte Projekt definiert
 
 22.03 Erste Version der GUI fertig gestellt(Fehler aufgrund einer leeren Zeile => Serverseitig geändert)
       Nach dem Beheben des Fehlers => GUI schöner gestalten
+
+23.03 Anmeldefenster für GUI erstellt => vorbereitet für Passwörter-Checkfunktion.
+      Diese prüft, ob das eingegebene Passwort korrekt ist. Wenn dies der Fall ist, wird der Client gestartet.
       

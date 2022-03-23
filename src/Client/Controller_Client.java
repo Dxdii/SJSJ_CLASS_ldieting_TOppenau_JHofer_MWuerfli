@@ -6,7 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,15 +25,23 @@ import java.util.Objects;
 
 //public class Controller_Client implements Initializable {
 public class Controller_Client {
+    public TextField field;
+    public Button startBtn;
+    public Label question;
     @FXML
-    private GridPane gridPane;
-    private TextArea textArea;
-    @FXML
-    private GridPane projectlist;
+    private AnchorPane anchor;
 
     //@Override
     //public void initialize(URL location, ResourceBundle resources) {
     public void Start(ActionEvent event) {
+        String psw = field.getText();
+        //PSW Kontrolle
+
+        question.setText("Die Fragen werden derzeit gesendet");
+        anchor.getChildren().remove(startBtn);
+        Starten();
+    }
+    public void Starten() {
         Socket socketServer = null;
         assert false;
 
@@ -103,7 +115,8 @@ public class Controller_Client {
 
                     System.out.println(read + " & " + dialogController1.Answer());
                     System.out.println("Fragentyp1: " + readSplit[0]);
-                    dataOut.writeBytes(readSplit[0] + ":" + dialogController1.Answer() + "\n");
+                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController1.Answer() + "\n");
+                    dataOut.writeBytes(dialogController1.Answer() + "\n");
                     dataOut.flush();
 
                 } else if (Objects.equals(readSplit[1], "2")) {
@@ -138,7 +151,8 @@ public class Controller_Client {
                     stage.showAndWait();
                     System.out.println(read  + " & " + dialogController3.Text());
                     System.out.println("Fragentyp3" + readSplit[0]);
-                    dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
+                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
+                    dataOut.writeBytes(dialogController3.Text() + "\n");
                     dataOut.flush();
                 }else if(Objects.equals(readSplit[1], "ende")){
                     i=10;
