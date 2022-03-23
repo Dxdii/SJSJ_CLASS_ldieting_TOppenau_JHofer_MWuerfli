@@ -13,3 +13,5 @@ JAvafx implementiert eigene Packages installation Postgres und Java fx Bibliothe
 
 22:03: Mainserver umgeschrieben für die Nummerierung der Fragen. Bufferedwriter statt Dataoutpustream Text \r zerstört Würflingers
        auslesung deswegen entfernt.
+23.03: 
+Arbeiten Savetodatabase fertigstellen
