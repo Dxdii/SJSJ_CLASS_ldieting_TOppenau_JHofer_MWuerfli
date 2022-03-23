@@ -20,3 +20,7 @@ und anschließend in Kreisdiagramm anzeigen.
 16.03.2022: Abfrage der Min-MAx Werte bzw. Numerische Werte.
 Funktioniert mit den Testwerten nicht so wie gewünscht.
 Fragentyp gibt es 1-4, 1: JA/NEIN; 2: Min-Max; 3: Nummer; 4: noch unklar
+
+22.03.2022: Auswertung JA/NEIN-Typ fertiggestellt.
+Auswertung Min-Max, Standardabweichung fehlt noch.
+Für numerische Werte muss noch ein Histogramm ertstellt werden.
