@@ -19,14 +19,9 @@
     <bottom>
         <HBox prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
-                <HBox prefHeight="100.0" prefWidth="200.0">
+                <HBox prefHeight="43.0" prefWidth="620.0">
                     <children>
-                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdateClicked" prefHeight="70.0" prefWidth="227.0" text="Update" />
-                    </children>
-                </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button fx:id="btnAuswerten" mnemonicParsing="false" onAction="#btnAuswertenClicked" prefHeight="79.0" prefWidth="285.0" text="Auswerten" />
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdateClicked" prefHeight="43.0" prefWidth="619.0" text="Update" />
                     </children>
                 </HBox>
             </children>
@@ -38,32 +33,22 @@
     <center>
         <VBox prefHeight="299.0" prefWidth="122.0" BorderPane.alignment="CENTER">
             <children>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <Label prefWidth="139.0" text="Häufigkeiten der AntwortenHäufigkeiten der Antworten" />
-                    </children>
-                </VBox>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <TextField fx:id="textHaeufigkeit" />
-                    </children>
-                </VBox>
-                <VBox prefHeight="200.0" prefWidth="100.0">
+                <VBox prefHeight="29.0" prefWidth="139.0">
                     <children>
                         <Label prefHeight="17.0" prefWidth="145.0" text="Mittelwert" textAlignment="CENTER" />
                     </children>
                 </VBox>
-                <VBox prefHeight="200.0" prefWidth="100.0">
+                <VBox prefHeight="33.0" prefWidth="139.0">
                     <children>
                         <TextField fx:id="textMittelwert" />
                     </children>
                 </VBox>
-                <VBox prefHeight="200.0" prefWidth="100.0">
+                <VBox prefHeight="29.0" prefWidth="139.0">
                     <children>
                         <Label prefHeight="17.0" prefWidth="141.0" text="Standardabweichung" textAlignment="CENTER" />
                     </children>
                 </VBox>
-                <VBox prefHeight="200.0" prefWidth="100.0">
+                <VBox prefHeight="52.0" prefWidth="139.0">
                     <children>
                         <TextField fx:id="textStandardabweichung" />
                     </children>
