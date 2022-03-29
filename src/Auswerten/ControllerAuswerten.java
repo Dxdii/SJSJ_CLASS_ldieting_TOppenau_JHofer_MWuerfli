@@ -4,8 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -39,6 +38,7 @@ public class ControllerAuswerten {
     List<FragenAuswerten> fragenList = new ArrayList<>();
 
     ObservableList<PieChart.Data> pieChartData;
+    ObservableList<XYChart.Data> barChartData;
 
     public void initialize() {
         // Verbindung zu Datenbank herstellen beim Aufrufen der GUI!
@@ -210,7 +210,6 @@ public class ControllerAuswerten {
 
                     //anchorPane.getchildren().addAll(pieChartData)
                     PieChart pieChart = new PieChart(pieChartData);
-                    pieChart.set
                     anchorPane.getChildren().addAll(pieChart);
 
                 } catch (SQLException throwables) {
@@ -228,6 +227,24 @@ public class ControllerAuswerten {
 
                 st = null;
                 try {
+/*
+                    barChartData = FXCollections.observableArrayList(
+                            new XYChart.Data<>("1",1),
+                            new XYChart.Data<>("3",1),
+                            new XYChart.Data<>("1",1)
+                    );
+ */
+                    CategoryAxis xAxis = new CategoryAxis();
+                    xAxis.setLabel("Devices");
+
+                    NumberAxis yAxis = new NumberAxis();
+                    yAxis.setLabel("Visits");
+
+                    BarChart barChart = new BarChart(xAxis, yAxis);
+
+                    XYChart.Series dataSeries1 = new XYChart.Series();
+                    dataSeries1.setName("2014");
+
                     st = db.createStatement();
                     ResultSet rs = st.executeQuery("SELECT value\n" +
                             "FROM anumerisch\n" +
@@ -262,6 +279,11 @@ public class ControllerAuswerten {
 
                     rs.close();
                     st.close();
+/*
+                    XYChart barChart = new XYChart(barChartData);
+                    anchorPane.getChildren().addAll(XYChart);
+
+ */
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
