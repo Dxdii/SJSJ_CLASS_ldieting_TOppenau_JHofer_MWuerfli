@@ -134,6 +134,7 @@ public class ControllerAuswerten {
                     pieChartData = FXCollections.observableArrayList(
                             new PieChart.Data("JA",countja),
                             new PieChart.Data("NEIN",countnein)
+                    new PieChart.
                     );
 
                     rs.close();
@@ -192,6 +193,8 @@ public class ControllerAuswerten {
                             new PieChart.Data("1",1)
                     );
                     //pieChartData.set(1,2);
+
+                    // AnchorPane.getchildren().addAll(pieChartData)
 
                     rs.close();
                     st.close();
