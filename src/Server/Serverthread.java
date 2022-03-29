@@ -36,14 +36,14 @@ public class Serverthread extends Thread {
                 if (s.equals("1234")) {
                     if (login.frunning) {
                         Thread.sleep(login.countdownStarter * 1000 - 3000);
-                        dataOut.write("3" + "\n");
-                        dataOut.flush();
+                        //dataOut.write("3" + "\n");
+                        //dataOut.flush();
                         Thread.sleep(1000);
-                        dataOut.write("2" + "\n");
-                        dataOut.flush();
+                        //dataOut.write("2" + "\n");
+                        //dataOut.flush();
                         Thread.sleep(1000);
-                        dataOut.write("1" + "\n");
-                        dataOut.flush();
+                        //dataOut.write("1" + "\n");
+                        //dataOut.flush();
                         Thread.sleep(1000);
                     }
                     int i = 0;
@@ -74,23 +74,23 @@ public class Serverthread extends Thread {
                             if (d.get(i).text.split(":")[1].equals("1")) {
                                 System.out.println("erste Frage");
                                 if (s.equals("ja")) {
-                                    JaNein a = new JaNein(d.get(i).text.split(":")[2], true);
+                                    //JaNein a = new JaNein(d.get(i).text.split(":")[2], true);
                                     // new SaveToDatabase(a);
                                 } else {
-                                    JaNein a = new JaNein(s, false);
+                                    //JaNein a = new JaNein(s, false);
                                     // new SaveToDatabase(a);
                                 }
 
                                 //2Typ
                             } else if (d.get(i).text.split(":")[1].equals("2")) {
                                 System.out.println("zweiter Fragentyp");
-                                vonBis a = new vonBis(d.get(i).text.split(":")[2], Integer.valueOf(s));
+                                //vonBis a = new vonBis(d.get(i).text.split(":")[2], Integer.valueOf(s));
                                 // new SaveToDatabase(a);
 
                                 //3Typ
                             } else if (d.get(i).text.split(":")[1].equals("3")) {
                                 System.out.println("dritte Fragentyp");
-                                Numerisch a = new Numerisch(d.get(i).text.split(":")[1], Float.valueOf(s));
+                                //Numerisch a = new Numerisch(d.get(i).text.split(":")[1], Float.valueOf(s));
                                 // new SaveToDatabase(a);
                             }
                         }

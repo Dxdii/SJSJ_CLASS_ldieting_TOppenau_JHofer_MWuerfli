@@ -25,8 +25,8 @@ public class SaveToDatabase {
         rs.next();
         int i = rs.getInt("count");
         ++i;
-        sttmnt.executeUpdate("INSERT INTO antwort values (" + i + qu + min + max + typ + ")");
-        System.out.println("INSERT INTO antwort values (" + i + qu + min + max + typ + ")");
+        //sttmnt.executeUpdate("INSERT INTO antwort values (" + i + qu + min + max + typ + ")");
+        //System.out.println("INSERT INTO antwort values (" + i + qu + min + max + typ + ")");
     }
     public SaveToDatabase(JaNein awnser) throws SQLException {
         Statement sttmnt = db.createStatement();
@@ -58,7 +58,7 @@ public class SaveToDatabase {
         int i = rs.getInt("count");
         ++i;
         JaNein j1 = new JaNein("Frage X", i ,true);
-        SaveToDatabase f = new SaveToDatabase("Frage X", 0, 0, 1);
+        //SaveToDatabase f = new SaveToDatabase("Frage X", 0, 0, 1);
         SaveToDatabase s = new SaveToDatabase(j1);
     }
 
