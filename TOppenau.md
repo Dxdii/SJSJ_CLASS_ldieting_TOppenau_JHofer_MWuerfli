@@ -19,8 +19,11 @@ und anschließend in Kreisdiagramm anzeigen.
 
 16.03.2022: Abfrage der Min-MAx Werte bzw. Numerische Werte.
 Funktioniert mit den Testwerten nicht so wie gewünscht.
-Fragentyp gibt es 1-4, 1: JA/NEIN; 2: Min-Max; 3: Nummer; 4: noch unklar
+Fragentyp gibt es 1-4, 1: JA/NEIN; 2: Min-Max; 3: Nummer; 4: noch unklar.
 
-22.03.2022: Auswertung JA/NEIN-Typ fertiggestellt.
-Auswertung Min-Max, Standardabweichung fehlt noch.
-Für numerische Werte muss noch ein Histogramm ertstellt werden.
+22.03.2022: Mittelwert aus Datenbank abfragen als Float-Wert im SQL-Statement umwandeln.
+FXML-Fenster angepasst, Häufigkeit entfernt, Kreisdiagramm nur bei Frage Typ 1,2 anzeigen.
+
+23.03.2022: Fragen Typ 3 (numerisch) Histogramm einbinden.
+Standardabweichung und Mittelwert bei Fragen Typ 2 (min-max) und 3 (numerisch) mit 
+runden auf zwei Nachkommastellen fertiggestellt.
