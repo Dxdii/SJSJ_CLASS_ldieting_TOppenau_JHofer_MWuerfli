@@ -40,4 +40,6 @@ Der Port wurde einmal über das gesammte Projekt definiert
 
 23.03 Anmeldefenster für GUI erstellt => vorbereitet für Passwörter-Checkfunktion.
       Diese prüft, ob das eingegebene Passwort korrekt ist. Wenn dies der Fall ist, wird der Client gestartet.
-      
+
+29.03 Erstellen einer Funktion, die mehrere Clientpasswörter zulässt (csv-File)
+      Unterscheidung der Fragen => umstellen auf Switch
