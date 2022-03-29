@@ -3,6 +3,7 @@ package Auswerten;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -21,13 +22,12 @@ public class ControllerAuswerten {
     public ListView listFrage;
 
     public Button btnUpdate;
-    public Button btnAuswerten;
 
-    public TextField textHaeufigkeit;
     public TextField textMittelwert;
     public TextField textStandardabweichung;
 
     public PieChart chartKreis;
+    public BarChart chartHisto;
 
     int index;
     Connection db = null;
@@ -82,31 +82,11 @@ public class ControllerAuswerten {
             });
 
         } catch (SQLException throwables) {
-                throwables.printStackTrace();
-                System.err.println("Fehler beim Einlesen der Daten aus der Datenbank!");
-                btnUpdate.setText("Fehler DB!!!");
-                btnUpdate.setStyle("-fx-background-color: rgb(225,0,0);");
+            throwables.printStackTrace();
+            System.err.println("Fehler beim Einlesen der Daten aus der Datenbank!");
+            btnUpdate.setText("Fehler DB!!!");
+            btnUpdate.setStyle("-fx-background-color: rgb(225,0,0);");
         }
-    }
-
-    public void btnAuswertenClicked(ActionEvent actionEvent) {
-
-        System.out.println("Button Auswerten!");
-
-/*
-        pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Num1",7),
-                new PieChart.Data("Num2",14),
-                new PieChart.Data("Num3",2),
-                new PieChart.Data("Num4",5)
-            );
-
-
-        chartKreis.getData().clear();
-
-        chartKreis.getData().addAll(pieChartData);
- */
-
     }
 
     public void listMouseClicked(MouseEvent mouseEvent) {
@@ -126,6 +106,8 @@ public class ControllerAuswerten {
         switch (type){
             case 1:
                 System.out.println("Fragen-Typ => JA/NEIN");
+                textMittelwert.clear();
+                textStandardabweichung.clear();
                 /*
                 SELECT value
                 FROM ajanein
@@ -136,8 +118,8 @@ public class ControllerAuswerten {
                 try {
                     st = db.createStatement();
                     ResultSet rs = st.executeQuery("SELECT value\n" +
-                            "                FROM ajanein\n" +
-                            "                JOIN antwort a on a.kennummer = ajanein.akn\n");
+                            "FROM ajanein\n" +
+                            "JOIN antwort a on a.kennummer = ajanein.akn\n");
                     while (rs.next()) {
                         if (rs.getBoolean("value") == true) {
                             countja++;
@@ -157,6 +139,12 @@ public class ControllerAuswerten {
                     rs.close();
                     st.close();
 
+                    // Diagramm ertsellen:
+                    chartKreis.getData().clear();
+                    chartKreis.getData().addAll(pieChartData);
+
+                    countja = 0;
+                    countnein = 0;
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                     System.err.println("Fehler beim Auslesen der Antworten JA/NEIN!");
@@ -171,11 +159,30 @@ public class ControllerAuswerten {
                 try {
                     st = db.createStatement();
                     ResultSet rs = st.executeQuery("SELECT value\n" +
-                            "                FROM avonbis\n" +
-                            "                JOIN antwort a on a.kennummer = avonbis.akn\n");
+                            "FROM avonbis\n" +
+                            "JOIN antwort a on a.kennummer = avonbis.akn\n");
                     while (rs.next()) {
                         System.out.println("Min-Max Wert: " + rs.getInt("value"));
+                    }
 
+                    // Mittelwert:
+                    ResultSet rsavg = st.executeQuery("SELECT avg(value)::FLOAT AS value\n" +
+                            "FROM avonbis\n" +
+                            "JOIN antwort a on a.kennummer = avonbis.akn;");
+
+                    while (rsavg.next()) {
+                        System.out.println("Mittelwert: " + rsavg.getFloat("value"));
+                        textMittelwert.setText(String.valueOf(Math.round(rsavg.getFloat("value")*100.0)/100.0));
+                    }
+
+                    // Standardabweichung:
+                    ResultSet rsstd = st.executeQuery("SELECT stddev(value)::FLOAT AS value\n" +
+                            "FROM avonbis\n" +
+                            "JOIN antwort a on a.kennummer = avonbis.akn;");
+
+                    while (rsstd.next()) {
+                        System.out.println("Standardabweichung: " + rsstd.getFloat("value"));
+                        textStandardabweichung.setText(String.valueOf(Math.round(rsstd.getFloat("value")*100.0)/100.0));
                     }
 
 
@@ -184,11 +191,14 @@ public class ControllerAuswerten {
                             new PieChart.Data("3",1),
                             new PieChart.Data("1",1)
                     );
-
                     //pieChartData.set(1,2);
 
                     rs.close();
                     st.close();
+
+                    // Diagramm ertsellen:
+                    chartKreis.getData().clear();
+                    chartKreis.getData().addAll(pieChartData);
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -200,24 +210,41 @@ public class ControllerAuswerten {
 
             case 3:
                 System.out.println("Fragen-Typ => Nummer");
+                chartKreis.getData().clear();
 
                 st = null;
                 try {
                     st = db.createStatement();
                     ResultSet rs = st.executeQuery("SELECT value\n" +
-                            "                FROM anumerisch\n" +
-                            "                JOIN antwort a on a.kennummer = anumerisch.akn\n");
+                            "FROM anumerisch\n" +
+                            "JOIN antwort a on a.kennummer = anumerisch.akn\n");
                     while (rs.next()) {
                         System.out.println("Test-Num: " + rs.getInt("value"));
-
                     }
 
 
-                    pieChartData = FXCollections.observableArrayList(
-                            new PieChart.Data("Wert1",4),
-                            new PieChart.Data("Wert2",15)
-                    );
 
+
+
+                    // Mittelwert:
+                    ResultSet rsavg = st.executeQuery("SELECT avg(value)::FLOAT AS value\n" +
+                            "FROM anumerisch\n" +
+                            "JOIN antwort a on a.kennummer = anumerisch.akn;");
+
+                    while (rsavg.next()) {
+                        System.out.println("Mittelwert: " + rsavg.getFloat("value"));
+                        textMittelwert.setText(String.valueOf(Math.round(rsavg.getFloat("value")*100.0)/100.0));
+                    }
+
+                    // Standardabweichung:
+                    ResultSet rsstd = st.executeQuery("SELECT stddev(value)::FLOAT AS value\n" +
+                            "FROM anumerisch\n" +
+                            "JOIN antwort a on a.kennummer = anumerisch.akn;");
+
+                    while (rsstd.next()) {
+                        System.out.println("Standardabweichung: " + rsstd.getFloat("value"));
+                        textStandardabweichung.setText(String.valueOf(Math.round(rsstd.getFloat("value")*100.0)/100.0));
+                    }
 
                     rs.close();
                     st.close();
@@ -226,7 +253,6 @@ public class ControllerAuswerten {
                     throwables.printStackTrace();
                     System.err.println("Fehler beim Auslesen der Antworten Nummer!");
                 }
-
                 break;
 
             default:
@@ -245,8 +271,8 @@ public class ControllerAuswerten {
  */
 
         // Diagramm ertsellen:
-        chartKreis.getData().clear();
-        chartKreis.getData().addAll(pieChartData);
+        //chartKreis.getData().clear();
+        //chartKreis.getData().addAll(pieChartData);
 
     }
 

@@ -28,7 +28,20 @@
         </HBox>
     </bottom>
     <right>
-        <PieChart fx:id="chartKreis" prefHeight="282.0" prefWidth="261.0" BorderPane.alignment="CENTER" />
+        <VBox>
+            <children>
+                <VBox>
+                    <children>
+                        <PieChart fx:id="chartKreis" prefHeight="282.0" prefWidth="261.0" BorderPane.alignment="CENTER" />
+                    </children>
+                </VBox>
+                <VBox>
+                <children>
+
+                </children>
+                </VBox>
+            </children>
+        </VBox>
     </right>
     <center>
         <VBox prefHeight="299.0" prefWidth="122.0" BorderPane.alignment="CENTER">
