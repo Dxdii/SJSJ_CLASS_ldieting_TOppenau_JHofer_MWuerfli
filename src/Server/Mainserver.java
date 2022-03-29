@@ -1,6 +1,6 @@
 package Server;
 
-import Modules.Frage;
+import Modules.*;
 import Modules.SaveToDatabase;
 
 import java.io.BufferedReader;
@@ -17,8 +17,8 @@ public class Mainserver {
     public static void main(String[] args) {
 
         try {
-
-            int i = 0;
+            getlengthfrdb u = new getlengthfrdb();
+            int i = u.getlenngth();
             boolean running = true;
             // Auslesen der Fragen in die Fragen Klasse
             FileReader fr = new FileReader(new File("Fragen.csv"));
