@@ -19,18 +19,25 @@ public class SaveToDatabase {
         Statement sttmnt = db.createStatement();
 
         int i = 0;
-        while(i <= qu.size()) {
+        while(i < qu.size()) {
+            String st = null;
             String str = qu.get(i).text;
-            String st = str.split(":")[2];
-            if (str.split(":").length > 2) {
+            if(str.equals("")){
 
-                System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'"  + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
-                sttmnt.executeUpdate("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
-                System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
-            } else {
-                sttmnt.executeUpdate("INSERT INTO frage values (" + qu.get(i).Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
+            }else {
+               st = str.split(":")[2];
+                if (str.split(":").length > 3) {
 
+                    System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'"  + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
+                    sttmnt.executeUpdate("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
+                    System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
+                } else {
+                    System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
+                    sttmnt.executeUpdate("INSERT INTO frage values (" + qu.get(i).Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
+
+                }
             }
+
             i++;
         }
     }
