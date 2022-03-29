@@ -28,7 +28,7 @@
         </HBox>
     </bottom>
     <right>
-
+        <AnchorPane fx:id="anchorPane" maxHeight="50.0" maxWidth="50.0"/>
         <!--
         <VBox>
             <children>

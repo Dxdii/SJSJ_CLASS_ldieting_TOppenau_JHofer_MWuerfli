@@ -3,12 +3,14 @@ package Auswerten;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,7 +29,9 @@ public class ControllerAuswerten {
     public TextField textStandardabweichung;
 
     public PieChart chartKreis;
-    public BarChart chartHisto;
+
+    public AnchorPane anchorPane;
+    //public BarChart chartHisto;
 
     int index;
     Connection db = null;
@@ -108,6 +112,7 @@ public class ControllerAuswerten {
                 System.out.println("Fragen-Typ => JA/NEIN");
                 textMittelwert.clear();
                 textStandardabweichung.clear();
+                anchorPane.getChildren().clear();
                 /*
                 SELECT value
                 FROM ajanein
@@ -134,15 +139,17 @@ public class ControllerAuswerten {
                     pieChartData = FXCollections.observableArrayList(
                             new PieChart.Data("JA",countja),
                             new PieChart.Data("NEIN",countnein)
-                    new PieChart.
                     );
 
                     rs.close();
                     st.close();
 
                     // Diagramm ertsellen:
-                    chartKreis.getData().clear();
-                    chartKreis.getData().addAll(pieChartData);
+                    //chartKreis.getData().clear();
+                    //chartKreis.getData().addAll(pieChartData);
+
+                    PieChart pieChart = new PieChart(pieChartData);
+                    anchorPane.getChildren().addAll(pieChart);
 
                     countja = 0;
                     countnein = 0;
@@ -155,7 +162,7 @@ public class ControllerAuswerten {
 
             case 2:
                 System.out.println("Fragen-Typ => Min-Max");
-
+                anchorPane.getChildren().clear();
                 st = null;
                 try {
                     st = db.createStatement();
@@ -194,14 +201,17 @@ public class ControllerAuswerten {
                     );
                     //pieChartData.set(1,2);
 
-                    // AnchorPane.getchildren().addAll(pieChartData)
-
                     rs.close();
                     st.close();
 
                     // Diagramm ertsellen:
-                    chartKreis.getData().clear();
-                    chartKreis.getData().addAll(pieChartData);
+                    //chartKreis.getData().clear();
+                    //chartKreis.getData().addAll(pieChartData);
+
+                    //anchorPane.getchildren().addAll(pieChartData)
+                    PieChart pieChart = new PieChart(pieChartData);
+                    pieChart.set
+                    anchorPane.getChildren().addAll(pieChart);
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -213,7 +223,8 @@ public class ControllerAuswerten {
 
             case 3:
                 System.out.println("Fragen-Typ => Nummer");
-                chartKreis.getData().clear();
+                //chartKreis.getData().clear();
+                anchorPane.getChildren().clear();
 
                 st = null;
                 try {
