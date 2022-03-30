@@ -78,10 +78,9 @@ public class Controller_Client {
             System.out.println("Test");
             //System.out.println(in.readLine());
             String read;
-            int i=0;
+            boolean i=false;
             //while ((read = in.readLine()) != "Ende") {
-            while (i!=9) {
-                i++;
+            while (i) {
                 System.out.println("hallo");
 
                 do {
@@ -99,6 +98,7 @@ public class Controller_Client {
                 String[] readSplit = read.split(":");
 
                 switch(readSplit[1]){
+
                     case "1":
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ1.fxml"));
                         Parent parent = fxmlLoader.load();
@@ -157,7 +157,7 @@ public class Controller_Client {
                         break;
 
                     default:
-                        i=10;
+                        i=true;
                         System.out.println("This is the end");
                         break;
                 }
@@ -168,21 +168,6 @@ public class Controller_Client {
             ex.printStackTrace();
         }
 
-
-
-        //}
-
-
-            /*System.out.println("Test2");
-            while ( (textInput = reader.readLine() ) != null && !"e".equals(textInput))
-            {
-
-                System.out.println(in.readLine());
-
-
-            }*/
-        //User hat "e" eingegeben: Socket dichtmachen.
-        //socketServer.close();
     }
     public boolean Compare(String str){
         try (BufferedReader br = new BufferedReader(new FileReader("pswClient.csv"))) {
