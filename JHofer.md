@@ -18,3 +18,8 @@ Befühlung der Tabellen mit Beispielwerten
         Fragen in SavetoDatabase hinzufügen
 
 23.03: Fragen fertigstellen in SavetoDatabase
+
+19.03: Fehlerbehebung
+
+30.03: Entfernen falscher und überflüssiger Daten aus der Datenbank
+Fehlerkorrektur bei dem Überprüfen der Fragen
