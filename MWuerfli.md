@@ -43,3 +43,7 @@ Der Port wurde einmal über das gesammte Projekt definiert
 
 29.03 Erstellen einer Funktion, die mehrere Clientpasswörter zulässt (csv-File)
       Unterscheidung der Fragen => umstellen auf Switch
+
+30.03 Schleife im CLient abändern
+Abbruchbedingung im CLient etwas schöner gestalten
+(Fenster wird am Schluss noch nicht sauber geschlossen)
