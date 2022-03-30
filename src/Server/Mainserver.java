@@ -18,7 +18,7 @@ public class Mainserver {
 
         try {
             getlengthfrdb u = new getlengthfrdb();
-            int i = u.getlenngth();
+            int i = u.getlenngth()+1;
             boolean running = true;
             // Auslesen der Fragen in die Fragen Klasse
             FileReader fr = new FileReader(new File("Fragen.csv"));
@@ -27,15 +27,13 @@ public class Mainserver {
             String l = br.readLine();
             while (!l.equals("")) {
                 System.out.println(l);
-                if (!new getlengthfrdb().getquestions(l.split(":")[2]).equals(null)) {
-Questions.add(new Frage(l,Integer.valueOf(new getlengthfrdb().getquestions(l.split(":")[2]).split(":")[0])));
+                if (!new getlengthfrdb().getquestions(l.split(":")[2]).equals("null")) {
+Questions.add(new Frage(new getlengthfrdb().getquestions(l.split(":")[2]),Integer.valueOf(new getlengthfrdb().getquestions(l.split(":")[2]).split(":")[0])));
                 } else {
-                    if(l.equals("")){
 
-                    }else {
                         Questions.add(new Frage(l, i));
                         new SaveToDatabase(new Frage(l, i));
-                    }
+
                 }
                 l = br.readLine();
                 i++;

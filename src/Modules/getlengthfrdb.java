@@ -35,21 +35,21 @@ public class getlengthfrdb {
 
                 if (s.equals(z)) {
                     String s2 = rs.getString("kennummer");
-                    String s3=rs.getString("typ");
-                    if(rs.getString("typ").equals("2")){
+                    String s3 = rs.getString("typ");
+                    if (rs.getString("typ").equals("2")) {
 
-                                String s4 = rs.getString("min");
-                                String s5 = rs.getString("max");
+                        String s4 = rs.getString("min");
+                        String s5 = rs.getString("max");
 
-                        return s2+":"+s3+":"+s+":"+s4+":"+s5;
+                        return s2 + ":" + s3 + ":" + s + ":" + s4 + ":" + s5;
                     }
-                    return s2+":"+s3+":"+s;
+                    return s2 + ":" + s3 + ":" + s;
                 }
             }
             i++;
 
         }
-
+        z = "null";
         return z;
     }
 }
