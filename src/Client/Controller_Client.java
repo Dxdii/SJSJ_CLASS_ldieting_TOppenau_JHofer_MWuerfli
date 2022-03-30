@@ -18,6 +18,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
 
+import static com.sun.deploy.uitoolkit.ToolkitStore.dispose;
+import static com.sun.glass.ui.Cursor.setVisible;
+
 //public class Controller_Client implements Initializable {
 public class Controller_Client {
     public TextField field;
@@ -78,10 +81,9 @@ public class Controller_Client {
             System.out.println("Test");
             //System.out.println(in.readLine());
             String read;
-            int i=0;
+            boolean i=false;
             //while ((read = in.readLine()) != "Ende") {
-            while (i!=9) {
-                i++;
+            while (!i) {
                 System.out.println("hallo");
 
                 do {
@@ -90,15 +92,16 @@ public class Controller_Client {
                 }while(read == null);
                 System.out.println(read);
 
-                if(!read.contains(":") && read.length()>1){
-                    read = "1:ende";
-                }
+                //if(!read.contains(":") && read.length()>1){
+                   // read = "1:ende";
+                //}
                 //SetupDisplay(read);
                 // sicherheitscheck
 
                 String[] readSplit = read.split(":");
 
                 switch(readSplit[1]){
+
                     case "1":
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ1.fxml"));
                         Parent parent = fxmlLoader.load();
@@ -157,32 +160,26 @@ public class Controller_Client {
                         break;
 
                     default:
-                        i=10;
-                        System.out.println("This is the end");
+                        i=true;
+                        FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("Client_Typ4.fxml"));
+                        Parent parent4 = fxmlLoader4.load();
+
+                        Scene scene4 = new Scene(parent4, 600, 400);
+                        Stage stage4 = new Stage();
+                        stage4.initModality(Modality.APPLICATION_MODAL);
+                        stage4.setScene(scene4);
+                        stage4.showAndWait();
+                        setVisible(false);
+                        dispose();
                         break;
                 }
 
             }
             System.out.println("Ende");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-
-
-        //}
-
-
-            /*System.out.println("Test2");
-            while ( (textInput = reader.readLine() ) != null && !"e".equals(textInput))
-            {
-
-                System.out.println(in.readLine());
-
-
-            }*/
-        //User hat "e" eingegeben: Socket dichtmachen.
-        //socketServer.close();
     }
     public boolean Compare(String str){
         try (BufferedReader br = new BufferedReader(new FileReader("pswClient.csv"))) {
