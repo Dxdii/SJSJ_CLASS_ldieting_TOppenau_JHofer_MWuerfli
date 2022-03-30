@@ -27,3 +27,6 @@ FXML-Fenster angepasst, Häufigkeit entfernt, Kreisdiagramm nur bei Frage Typ 1,
 23.03.2022: Fragen Typ 3 (numerisch) Histogramm einbinden.
 Standardabweichung und Mittelwert bei Fragen Typ 2 (min-max) und 3 (numerisch) mit 
 runden auf zwei Nachkommastellen fertiggestellt.
+
+29.03.2022: AnchorPane angelegt, um PieChart und BarChart darzustellen. 
+Fehler bei BarChart ausgabe muss noch behoben werden.

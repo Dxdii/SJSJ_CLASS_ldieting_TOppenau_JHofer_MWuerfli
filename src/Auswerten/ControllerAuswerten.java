@@ -163,6 +163,10 @@ public class ControllerAuswerten {
             case 2:
                 System.out.println("Fragen-Typ => Min-Max");
                 anchorPane.getChildren().clear();
+                int count = 3;
+                int min = 0;
+                int max = 0;
+
                 st = null;
                 try {
                     st = db.createStatement();
@@ -173,6 +177,18 @@ public class ControllerAuswerten {
                         System.out.println("Min-Max Wert: " + rs.getInt("value"));
                     }
 
+                    // Min-Max
+                    ResultSet rsminmax = st.executeQuery("SELECT min, max\n" +
+                            "FROM avonbis\n" +
+                            "JOIN antwort a on a.kennummer = avonbis.akn\n" +
+                            "JOIN frage f on f.kennummer = a.fkn\n" +
+                            "WHERE f.kennummer = " + (index + 1));
+                    while (rsminmax.next()) {
+                        min = rsminmax.getInt("min");
+                        max = rsminmax.getInt("max");
+                    }
+
+                    System.out.println("Min: " + min + " Max: " + max);
                     // Mittelwert:
                     ResultSet rsavg = st.executeQuery("SELECT avg(value)::FLOAT AS value\n" +
                             "FROM avonbis\n" +
@@ -194,21 +210,25 @@ public class ControllerAuswerten {
                     }
 
 
+
+
                     pieChartData = FXCollections.observableArrayList(
-                            new PieChart.Data("1",1),
-                            new PieChart.Data("3",1),
-                            new PieChart.Data("1",1)
+                            new PieChart.Data("text1",1),
+                            new PieChart.Data("text3",8),
+                            new PieChart.Data("text8",2)
+
                     );
-                    //pieChartData.set(1,2);
+
+
+
 
                     rs.close();
                     st.close();
 
-                    // Diagramm ertsellen:
+                    //Diagramm ertsellen:
                     //chartKreis.getData().clear();
                     //chartKreis.getData().addAll(pieChartData);
 
-                    //anchorPane.getchildren().addAll(pieChartData)
                     PieChart pieChart = new PieChart(pieChartData);
                     anchorPane.getChildren().addAll(pieChart);
 

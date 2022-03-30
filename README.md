@@ -28,3 +28,11 @@ Pw:1234
 # Zugang zu den Tabellen
 user: reader
 passwort: reader
+#Fragendefinieren
+Fragen können generell in der Fragen.csv definiert werden:
+1:2:Von einer Skala von 1-5 wie gut FC Bayern?:1:5
+2:1:Gefaellt die Sportart Fußball?
+3:3:Wie viel sollte ein Verein kosten(in Euro)?
+
+
+

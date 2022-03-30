@@ -75,7 +75,7 @@ public class Serverthread extends Thread {
                             //1Typ
                             if (d.get(i).text.split(":")[1].equals("1")) {
                                 System.out.println("erste Frage");
-                                if (s.equals("ja")) {
+                                if (s.equals("Ja")) {
                                     JaNein a = new JaNein(d.get(i).text.split(":")[2],d.get(i).Kennummer,true);
                                     new SaveToDatabase(a);
                                 } else {

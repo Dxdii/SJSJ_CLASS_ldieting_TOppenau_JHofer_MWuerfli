@@ -18,3 +18,5 @@ Arbeiten Savetodatabase fertigstellen
 
 29.03:
 Savetodatabase getlengthfrom programmmiert und neue definierung fehler bei fragen upload
+30.03:
+Erster gesamtdurchlauf funktionsfähig 
