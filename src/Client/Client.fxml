@@ -12,7 +12,8 @@
     <children>
         <VBox layoutX="119.0" layoutY="39.0" prefHeight="310.0" prefWidth="321.0">
             <children>
-                <Label fx:id="question" prefHeight="71.0" prefWidth="328.0" text="Label" />
+                <Label fx:id="question" prefHeight="71.0" prefWidth="328.0"
+                       text="Wilkommen. Geben Sie bitte ein gültiges Passwort ein." />
                 <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                     <items>
                         <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

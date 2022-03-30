@@ -26,8 +26,9 @@ public class Controller_Typ1{
         ToggleGroup group = new ToggleGroup();
         Ja.setToggleGroup(group);
         nein.setToggleGroup(group);
-        String[] str = String.valueOf(group.getSelectedToggle()).split("'");
-        select = str[1];
+        String str = String.valueOf(group.getSelectedToggle());
+        String[] split = str.split("'");
+        select = split[1];
         closeStage(event);
     }
 
