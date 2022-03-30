@@ -101,7 +101,7 @@ public class Serverthread extends Thread {
                         i++;
                         if (i >= d.size()) {
                             fragezeit = false;
-                            dataOut.write("Danke fuer ihre Teilnahme" + "\n");
+                            dataOut.write(":Danke fuer ihre Teilnahme" + "\n");
                             dataOut.flush();
                             close();
                         }
