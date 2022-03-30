@@ -18,6 +18,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
 
+import static com.sun.deploy.uitoolkit.ToolkitStore.dispose;
+import static com.sun.glass.ui.Cursor.setVisible;
+
 //public class Controller_Client implements Initializable {
 public class Controller_Client {
     public TextField field;
@@ -80,7 +83,7 @@ public class Controller_Client {
             String read;
             boolean i=false;
             //while ((read = in.readLine()) != "Ende") {
-            while (i) {
+            while (!i) {
                 System.out.println("hallo");
 
                 do {
@@ -89,9 +92,9 @@ public class Controller_Client {
                 }while(read == null);
                 System.out.println(read);
 
-                if(!read.contains(":") && read.length()>1){
-                    read = "1:ende";
-                }
+                //if(!read.contains(":") && read.length()>1){
+                   // read = "1:ende";
+                //}
                 //SetupDisplay(read);
                 // sicherheitscheck
 
@@ -158,13 +161,22 @@ public class Controller_Client {
 
                     default:
                         i=true;
-                        System.out.println("This is the end");
+                        FXMLLoader fxmlLoader4 = new FXMLLoader(getClass().getResource("Client_Typ4.fxml"));
+                        Parent parent4 = fxmlLoader4.load();
+
+                        Scene scene4 = new Scene(parent4, 600, 400);
+                        Stage stage4 = new Stage();
+                        stage4.initModality(Modality.APPLICATION_MODAL);
+                        stage4.setScene(scene4);
+                        stage4.showAndWait();
+                        setVisible(false);
+                        dispose();
                         break;
                 }
 
             }
             System.out.println("Ende");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
