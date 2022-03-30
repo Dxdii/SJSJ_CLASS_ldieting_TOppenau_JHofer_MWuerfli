@@ -25,15 +25,25 @@ public class Mainserver {
             BufferedReader br = new BufferedReader(fr);
             Vector<Frage> Questions = new Vector<>();
             String l = br.readLine();
-            while (l != null) {
-                Questions.add(new Frage(l, i));
+            while (!l.equals("")) {
+                System.out.println(l);
+                if (!new getlengthfrdb().getquestions(l.split(":")[2]).equals(null)) {
+Questions.add(new Frage(l,Integer.valueOf(new getlengthfrdb().getquestions(l.split(":")[2]).split(":")[0])));
+                } else {
+                    if(l.equals("")){
+
+                    }else {
+                        Questions.add(new Frage(l, i));
+                        new SaveToDatabase(new Frage(l, i));
+                    }
+                }
                 l = br.readLine();
                 i++;
             }
             br.close();
             i = 0;
 
-                new SaveToDatabase(Questions);
+
 
             // Starten des Servers
             ServerSocket b = new ServerSocket(Port);
