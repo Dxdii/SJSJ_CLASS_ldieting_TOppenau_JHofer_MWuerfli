@@ -15,32 +15,32 @@ public class SaveToDatabase {
     static ConnectDatabaseAuswerten a = new ConnectDatabaseAuswerten();
     static Connection db = a.getConnectToDatabase();
 
-    public SaveToDatabase(Vector<Frage> qu) throws SQLException {
+    public SaveToDatabase(Frage qu) throws SQLException {
         Statement sttmnt = db.createStatement();
 
         int i = 0;
-        while(i < qu.size()) {
+
             String st = null;
-            String str = qu.get(i).text;
+            String str = qu.text;
             if(str.equals("")){
 
             }else {
                st = str.split(":")[2];
                 if (str.split(":").length > 3) {
 
-                    System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'"  + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
-                    sttmnt.executeUpdate("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
-                    System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
+                    System.out.println("INSERT INTO frage values (" + qu.Kennummer + ", " + "'" + st + "'"  + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
+                    sttmnt.executeUpdate("INSERT INTO frage values (" + qu.Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
+                    System.out.println("INSERT INTO frage values (" + qu.Kennummer + ", " + "'" + st + "'" + ", " + str.split(":")[3] + ", " + str.split(":")[4] + ", " + str.split(":")[1] + ")");
                 } else {
-                    System.out.println("INSERT INTO frage values (" + qu.get(i).Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
-                    sttmnt.executeUpdate("INSERT INTO frage values (" + qu.get(i).Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
+                    System.out.println("INSERT INTO frage values (" + qu.Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
+                    sttmnt.executeUpdate("INSERT INTO frage values (" + qu.Kennummer  + ", " + "'" + st + "'" + ", " +  0  + ", " +  0  + ", " +  str.split(":")[1] + ")");
 
                 }
             }
 
-            i++;
+
         }
-    }
+
     public SaveToDatabase(JaNein awnser) throws SQLException {
         Statement sttmnt = db.createStatement();
         String str = "SELECT count(kennummer)\n" + "FROM antwort";
@@ -100,7 +100,7 @@ public class SaveToDatabase {
                 i++;
             }
             br.close();
-            SaveToDatabase s2 = new SaveToDatabase(Questions);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

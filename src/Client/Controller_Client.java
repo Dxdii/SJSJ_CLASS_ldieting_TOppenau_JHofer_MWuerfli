@@ -8,17 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Objects;
@@ -35,11 +30,15 @@ public class Controller_Client {
     //public void initialize(URL location, ResourceBundle resources) {
     public void Start(ActionEvent event) {
         String psw = field.getText();
+        if(Compare(psw)){
+            question.setText("Die Fragen werden derzeit gesendet");
+            startBtn.setDisable(false);
+            anchor.getChildren().clear();
+            Starten();
+        }
         //PSW Kontrolle
 
-        question.setText("Die Fragen werden derzeit gesendet");
-        anchor.getChildren().remove(startBtn);
-        Starten();
+
     }
     public void Starten() {
         Socket socketServer = null;
@@ -79,10 +78,9 @@ public class Controller_Client {
             System.out.println("Test");
             //System.out.println(in.readLine());
             String read;
-            int i=0;
+            boolean i=false;
             //while ((read = in.readLine()) != "Ende") {
-            while (i!=9) {
-                i++;
+            while (i) {
                 System.out.println("hallo");
 
                 do {
@@ -91,7 +89,7 @@ public class Controller_Client {
                 }while(read == null);
                 System.out.println(read);
 
-                if(!read.contains(":") && read.length()>3){
+                if(!read.contains(":") && read.length()>1){
                     read = "1:ende";
                 }
                 //SetupDisplay(read);
@@ -99,84 +97,93 @@ public class Controller_Client {
 
                 String[] readSplit = read.split(":");
 
+                switch(readSplit[1]){
 
+                    case "1":
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ1.fxml"));
+                        Parent parent = fxmlLoader.load();
+                        Controller_Typ1 dialogController1 = fxmlLoader.<Controller_Typ1>getController();
+                        dialogController1.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2] + '?');
 
-                if (Objects.equals(readSplit[1], "1")) {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ1.fxml"));
-                    Parent parent = fxmlLoader.load();
-                    Controller_Typ1 dialogController1 = fxmlLoader.<Controller_Typ1>getController();
-                    dialogController1.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2] + '?');
+                        Scene scene = new Scene(parent, 600, 400);
+                        Stage stage = new Stage();
+                        stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setScene(scene);
+                        stage.showAndWait();
 
-                    Scene scene = new Scene(parent, 600, 400);
-                    Stage stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setScene(scene);
-                    stage.showAndWait();
+                        System.out.println(read + " & " + dialogController1.Answer());
+                        System.out.println("Fragentyp1: " + readSplit[0]);
+                        //dataOut.writeBytes(readSplit[0] + ":" + dialogController1.Answer() + "\n");
+                        dataOut.writeBytes(dialogController1.Answer() + "\n");
+                        dataOut.flush();
+                        break;
 
-                    System.out.println(read + " & " + dialogController1.Answer());
-                    System.out.println("Fragentyp1: " + readSplit[0]);
-                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController1.Answer() + "\n");
-                    dataOut.writeBytes(dialogController1.Answer() + "\n");
-                    dataOut.flush();
+                    case "2":
+                        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("Client_Typ2.fxml"));
+                        Parent parent2 = fxmlLoader2.load();
+                        Controller_Typ2 dialogController2 = fxmlLoader2.<Controller_Typ2>getController();
+                        dialogController2.SetMin(Integer.parseInt(readSplit[3]));
+                        dialogController2.SetMax(Integer.parseInt(readSplit[4]));
+                        dialogController2.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2]);
 
-                } else if (Objects.equals(readSplit[1], "2")) {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ2.fxml"));
-                    Parent parent = fxmlLoader.load();
-                    Controller_Typ2 dialogController2 = fxmlLoader.<Controller_Typ2>getController();
-                    dialogController2.SetMin(Integer.parseInt(readSplit[3]));
-                    dialogController2.SetMax(Integer.parseInt(readSplit[4]));
-                    dialogController2.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2]);
+                        Scene scene2 = new Scene(parent2, 600, 400);
+                        Stage stage2 = new Stage();
+                        stage2.initModality(Modality.APPLICATION_MODAL);
+                        stage2.setScene(scene2);
+                        stage2.showAndWait();
+                        System.out.println(read + " & " + dialogController2.Slide());
+                        //dataOut.writeBytes(readSplit[0] + ":" + dialogController2.Slide() + "\n");
+                        dataOut.writeBytes(dialogController2.Slide() + "\n");
+                        dataOut.flush();
+                        System.out.println("Fragentyp2-" + readSplit[0]);
+                        break;
 
-                    Scene scene = new Scene(parent, 600, 400);
-                    Stage stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setScene(scene);
-                    stage.showAndWait();
-                    System.out.println(read + " & " + dialogController2.Slide());
-                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController2.Slide() + "\n");
-                    dataOut.writeBytes(dialogController2.Slide() + "\n");
-                    dataOut.flush();
-                    System.out.println("Fragentyp2-" + readSplit[0]);
+                    case "3":
+                        FXMLLoader fxmlLoader3 = new FXMLLoader(getClass().getResource("Client_Typ3.fxml"));
+                        Parent parent3 = fxmlLoader3.load();
+                        Controller_Typ3 dialogController3 = fxmlLoader3.<Controller_Typ3>getController();
+                        dialogController3.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2] + '?');
 
-                } else if (Objects.equals(readSplit[1], "3")) {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Client_Typ3.fxml"));
-                    Parent parent = fxmlLoader.load();
-                    Controller_Typ3 dialogController3 = fxmlLoader.<Controller_Typ3>getController();
-                    dialogController3.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2] + '?');
+                        Scene scene3 = new Scene(parent3, 600, 400);
+                        Stage stage3 = new Stage();
+                        stage3.initModality(Modality.APPLICATION_MODAL);
+                        stage3.setScene(scene3);
+                        stage3.showAndWait();
+                        System.out.println(read  + " & " + dialogController3.Text());
+                        System.out.println("Fragentyp3" + readSplit[0]);
+                        //dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
+                        dataOut.writeBytes(dialogController3.Text() + "\n");
+                        dataOut.flush();
+                        break;
 
-                    Scene scene = new Scene(parent, 600, 400);
-                    Stage stage = new Stage();
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.setScene(scene);
-                    stage.showAndWait();
-                    System.out.println(read  + " & " + dialogController3.Text());
-                    System.out.println("Fragentyp3" + readSplit[0]);
-                    //dataOut.writeBytes(readSplit[0] + ":" + dialogController3.Text() + "\n");
-                    dataOut.writeBytes(dialogController3.Text() + "\n");
-                    dataOut.flush();
-                }else if(Objects.equals(readSplit[1], "ende")){
-                    i=10;
+                    default:
+                        i=true;
+                        System.out.println("This is the end");
+                        break;
                 }
+
             }
             System.out.println("Ende");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
+    }
+    public boolean Compare(String str){
+        try (BufferedReader br = new BufferedReader(new FileReader("pswClient.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                if(Objects.equals(str, line)){
+                    return true;
+                }
 
-        //}
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
-            /*System.out.println("Test2");
-            while ( (textInput = reader.readLine() ) != null && !"e".equals(textInput))
-            {
-
-                System.out.println(in.readLine());
-
-
-            }*/
-        //User hat "e" eingegeben: Socket dichtmachen.
-        //socketServer.close();
+        return false;
     }
 
 }

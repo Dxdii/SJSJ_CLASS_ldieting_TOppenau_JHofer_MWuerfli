@@ -14,7 +14,7 @@ public class MainAuswerten extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sampleAuswerten.fxml"));
 
         primaryStage.setTitle("Polling Project - Auswertung - Tim Oppenauer");
-        primaryStage.setScene(new Scene(root, 600, 475));
+        primaryStage.setScene(new Scene(root, 900, 475)); //600, 475
         primaryStage.show();
     }
 

@@ -35,16 +35,18 @@ public class Serverthread extends Thread {
                 String s = sockin.readLine();
                 if (s.equals("1234")) {
                     if (login.frunning) {
-                        Thread.sleep(login.countdownStarter * 1000 - 3000);
-                        dataOut.write("3" + "\n");
-                        dataOut.flush();
-                        Thread.sleep(1000);
-                        dataOut.write("2" + "\n");
-                        dataOut.flush();
-                        Thread.sleep(1000);
-                        dataOut.write("1" + "\n");
-                        dataOut.flush();
-                        Thread.sleep(1000);
+                        if(login.countdownStarter * 1000 - 3000>0) {
+                            Thread.sleep(login.countdownStarter * 1000 - 3000);
+                            dataOut.write("3" + "\n");
+                            dataOut.flush();
+                            Thread.sleep(1000);
+                            dataOut.write("2" + "\n");
+                            dataOut.flush();
+                            Thread.sleep(1000);
+                            dataOut.write("1" + "\n");
+                            dataOut.flush();
+                            Thread.sleep(1000);
+                        }
                     }
                     int i = 0;
                     boolean fragezeit = true;
@@ -75,23 +77,23 @@ public class Serverthread extends Thread {
                                 System.out.println("erste Frage");
                                 if (s.equals("ja")) {
                                     JaNein a = new JaNein(d.get(i).text.split(":")[2],d.get(i).Kennummer,true);
-                                    // new SaveToDatabase(a);
+                                    new SaveToDatabase(a);
                                 } else {
                                     JaNein a = new JaNein(s, d.get(i).Kennummer,false);
-                                    // new SaveToDatabase(a);
+                                     new SaveToDatabase(a);
                                 }
 
                                 //2Typ
                             } else if (d.get(i).text.split(":")[1].equals("2")) {
                                 System.out.println("zweiter Fragentyp");
                                 vonBis a = new vonBis(d.get(i).text.split(":")[2],d.get(i).Kennummer, Integer.valueOf(s));
-                                // new SaveToDatabase(a);
+                                 new SaveToDatabase(a);
 
-                                //3Typ
+                               // 3Typ
                             } else if (d.get(i).text.split(":")[1].equals("3")) {
                                 System.out.println("dritte Fragentyp");
                                 Numerisch a = new Numerisch(d.get(i).text.split(":")[1],d.get(i).Kennummer, Float.valueOf(s));
-                                // new SaveToDatabase(a);
+                                 new SaveToDatabase(a);
                             }
                         }
 
@@ -99,7 +101,7 @@ public class Serverthread extends Thread {
                         i++;
                         if (i >= d.size()) {
                             fragezeit = false;
-                            dataOut.write("Danke fuer ihre Teilnahme" + "\n");
+                            dataOut.write(":Danke fuer ihre Teilnahme" + "\n");
                             dataOut.flush();
                             close();
                         }
@@ -116,6 +118,8 @@ public class Serverthread extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
 

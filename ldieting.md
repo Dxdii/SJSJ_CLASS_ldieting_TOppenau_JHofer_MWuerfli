@@ -15,3 +15,6 @@ JAvafx implementiert eigene Packages installation Postgres und Java fx Bibliothe
        auslesung deswegen entfernt.
 23.03: 
 Arbeiten Savetodatabase fertigstellen
+
+29.03:
+Savetodatabase getlengthfrom programmmiert und neue definierung fehler bei fragen upload
