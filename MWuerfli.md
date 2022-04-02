@@ -21,6 +21,12 @@ Je nach dem welcher Fragetyp kommt
        => Fehlerursache: Serverseitiger Fehler, wurde am Ende der Stunde angepasst
        Client Verbindung Consolenanwendung funktioniert => erweitern auf javafx
 
+12.03 Design der Benutzeroberfläche überlegen => umsetzten mit dem Scenebuilder
+
+13.03 JavaFX einrichten => noch nicht vollständig funktionsfähig
+    => GUI kann zumindest gestartet werden, dann gibt es jedoch einen Fehler
+
+
 15.03 Fehler: "Graphics Device initialization failed for :  d3d, sw
 Error initializing QuantumRenderer: no suitable pipeline found" beim Versuch JavaFX einzubinden
 

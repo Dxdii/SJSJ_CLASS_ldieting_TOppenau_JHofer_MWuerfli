@@ -37,14 +37,14 @@ public class Serverthread extends Thread {
                     if (login.frunning) {
                         if(login.countdownStarter * 1000 - 3000>0) {
                             Thread.sleep(login.countdownStarter * 1000 - 3000);
-                            dataOut.write("3" + "\n");
-                            dataOut.flush();
+                            //dataOut.write("3" + "\n");
+                            //dataOut.flush();
                             Thread.sleep(1000);
-                            dataOut.write("2" + "\n");
-                            dataOut.flush();
+                            //dataOut.write("2" + "\n");
+                            //dataOut.flush();
                             Thread.sleep(1000);
-                            dataOut.write("1" + "\n");
-                            dataOut.flush();
+                            //dataOut.write("1" + "\n");
+                            //dataOut.flush();
                             Thread.sleep(1000);
                         }
                     }
