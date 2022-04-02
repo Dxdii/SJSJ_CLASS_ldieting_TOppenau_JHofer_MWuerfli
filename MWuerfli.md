@@ -53,3 +53,6 @@ Der Port wurde einmal über das gesammte Projekt definiert
 30.03 Schleife im CLient abändern
 Abbruchbedingung im CLient etwas schöner gestalten
 (Fenster wird am Schluss noch nicht sauber geschlossen)
+
+02.04 Verbindungsaufbau anders gestalten (Passwordfield)
+Client beenden (bei falschem Passwort und bei einer fertigen Umfrage)
