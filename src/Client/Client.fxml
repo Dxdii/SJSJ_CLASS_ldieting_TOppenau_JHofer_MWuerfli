@@ -9,27 +9,34 @@
 
 
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.shape.Circle?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller_Client">
     <children>
         <VBox layoutX="119.0" layoutY="39.0" prefHeight="310.0" prefWidth="321.0">
             <children>
                 <Label fx:id="question" prefHeight="71.0" prefWidth="328.0"
-                       text="Wilkommen. Geben Sie bitte ein gültiges Passwort ein." />
+                       text="Wilkommen. Geben Sie bitte ein gültiges Passwort ein."/>
                 <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                     <items>
                         <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
-                                <PasswordField fx:id="pswField" layoutX="117.0" layoutY="36.0" prefHeight="25.0" prefWidth="59.0" />
-                            </children>
+                            <PasswordField fx:id="pswField" layoutX="118.0" layoutY="14.0" prefHeight="25.0"
+                                           prefWidth="59.0"/>
+                            <Circle fx:id="circle2" fill="#1fff85" layoutX="193.0" layoutY="64.0" radius="12.0"
+                                    stroke="WHITE" strokeType="INSIDE" visible="false"/>
+                            <Circle fx:id="circle3" fill="#ff2b1f" layoutX="148.0" layoutY="65.0" radius="12.0"
+                                    stroke="WHITE" strokeType="INSIDE" visible="false"/>
+                            <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="105.0" layoutY="65.0" radius="12.0"
+                                    stroke="WHITE" strokeType="INSIDE" visible="false"/>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                            <children>
-                                <Button onAction="#Start" fx:id="startBtn" layoutX="97.0" layoutY="47.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="nächste Frage" />
-                            </children>
+                            <Button onAction="#Start" fx:id="startBtn" layoutX="97.0" layoutY="47.0"
+                                    mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0"
+                                    text="nächste Frage"/>
                         </AnchorPane>
                     </items>
                 </SplitPane>
             </children>
+
         </VBox>
     </children>
 </AnchorPane>

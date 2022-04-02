@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,23 +13,32 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.StrokeType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static com.sun.deploy.uitoolkit.ToolkitStore.dispose;
 import static com.sun.glass.ui.Cursor.setVisible;
 
 //public class Controller_Client implements Initializable {
-public class Controller_Client {
+public class Controller_Client{
     public PasswordField pswField;
     public Button startBtn;
     public Label question;
+    public Circle circle1;
+    public Circle circle2;
+    public Circle circle3;
     @FXML
     private AnchorPane anchor;
 
@@ -37,9 +47,21 @@ public class Controller_Client {
     public void Start(ActionEvent event) {
         String psw = pswField.getText();
         if(Compare(psw)){
-            question.setText("Die Fragen werden derzeit gesendet");
-            startBtn.setDisable(false);
-            anchor.getChildren().clear();
+            question.setText("Die Fragen werden derzeit gesendet (Alle paar Sekunden)");
+            startBtn.setVisible(false);
+            startBtn.setCancelButton(false);
+            pswField.setVisible(false);
+            //anchor.getChildren().clear();
+            //SetCircle(circle1, "aqua");
+            //SetCircle(circle2, "aquamarine");
+            //SetCircle(circle3, "blue");
+
+            //anchor.getChildren().add(circle1);
+            //anchor.getChildren().add(circle2);
+            //anchor.getChildren().add(circle3);
+            circle1.setVisible(true);
+            circle2.setVisible(true);
+            circle3.setVisible(true);
             Starten();
         }
         //PSW Kontrolle
@@ -110,6 +132,7 @@ public class Controller_Client {
                         Parent parent = fxmlLoader.load();
                         Controller_Typ1 dialogController1 = fxmlLoader.<Controller_Typ1>getController();
                         dialogController1.ChangeLabel("Frage nr. " + readSplit[0] + ": " + readSplit[2] + '?');
+                        dialogController1.Select();
 
                         Scene scene = new Scene(parent, 600, 400);
                         Stage stage = new Stage();
@@ -203,4 +226,19 @@ public class Controller_Client {
     }
 
 
+    /*@Override
+    public void initialize(URL location, ResourceBundle resources) {
+        new Bounce(circle1).setCycleCount(4).setDelay(Duration.valueOf("500ms")).play();
+        new Bounce(circle2).setCycleCount(5).setDelay(Duration.valueOf("900ms")).play();
+        new Bounce(circle3).setCycleCount(3).setDelay(Duration.valueOf("1200ms")).play();
+    }
+
+    public void SetCircle(Circle circle, String color){
+       circle.setFill(Paint.valueOf("1f93ff00"));
+        circle.setRadius(10.0);
+        circle.setStroke(Paint.valueOf(color));
+        circle.setStrokeType(StrokeType.valueOf("INSIDE"));
+        circle.setStrokeWidth(6.0);
+
+    }*/
 }

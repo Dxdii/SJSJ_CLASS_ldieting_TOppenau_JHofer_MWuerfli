@@ -37,5 +37,8 @@ public class Controller_Typ1{
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
     }
+    public void Select(){
+        Ja.setSelected(true);
+    }
 
 }

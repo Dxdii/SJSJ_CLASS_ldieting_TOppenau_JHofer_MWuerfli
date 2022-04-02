@@ -56,3 +56,11 @@ Abbruchbedingung im CLient etwas schöner gestalten
 
 02.04 Verbindungsaufbau anders gestalten (Passwordfield)
 Client beenden (bei falschem Passwort und bei einer fertigen Umfrage)
+Toogle Group => Standardauswahl auf ja setzten
+Button nach klicken deaktivieren und Visiblity auf falsch setzten
+
+Versuchen eine Animation zu erstellen
+=> AnimationFX & Bounce Klasse => GitHub: https://github.com/Typhon0/AnimateFX/blob/master/animatefx/src/main/java/animatefx/animation
+Nicht geschafft aufgrund des bereits laufenden Threads (Keine Möglichkeit gefunden, dass Problem zu lösen)
+Die Circles (die Animiert werden sollten) wurden drinnen gelassen. Sie sollten dazu dienen,
+anzuzeigen, dass der Client noch läuft)
