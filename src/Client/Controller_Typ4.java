@@ -3,12 +3,15 @@ package Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import static com.sun.deploy.uitoolkit.ToolkitStore.dispose;
 import static com.sun.glass.ui.Cursor.setVisible;
 
 public class Controller_Typ4 {
+    public Label question;
+
     @FXML
     void EndQuestion(ActionEvent event) {
         closeStage(event);

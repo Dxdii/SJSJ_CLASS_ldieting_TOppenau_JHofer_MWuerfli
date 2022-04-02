@@ -1,6 +1,7 @@
 package Client;
 
 import Server.Mainserver;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +9,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,7 +26,7 @@ import static com.sun.glass.ui.Cursor.setVisible;
 
 //public class Controller_Client implements Initializable {
 public class Controller_Client {
-    public TextField field;
+    public PasswordField pswField;
     public Button startBtn;
     public Label question;
     @FXML
@@ -32,7 +35,7 @@ public class Controller_Client {
     //@Override
     //public void initialize(URL location, ResourceBundle resources) {
     public void Start(ActionEvent event) {
-        String psw = field.getText();
+        String psw = pswField.getText();
         if(Compare(psw)){
             question.setText("Die Fragen werden derzeit gesendet");
             startBtn.setDisable(false);
@@ -169,8 +172,8 @@ public class Controller_Client {
                         stage4.initModality(Modality.APPLICATION_MODAL);
                         stage4.setScene(scene4);
                         stage4.showAndWait();
-                        setVisible(false);
-                        dispose();
+                        //Beenden der Clientanwendung
+                        Platform.exit();
                         break;
                 }
 
@@ -185,17 +188,19 @@ public class Controller_Client {
         try (BufferedReader br = new BufferedReader(new FileReader("pswClient.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 if(Objects.equals(str, line)){
                     return true;
                 }
 
             }
+            System.out.println("Passwort falsch. Sie konnten deshalb nicht verbunden werden.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        //Beenden der Clientanwendung
+        Platform.exit();
         return false;
     }
+
 
 }
