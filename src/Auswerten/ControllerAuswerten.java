@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ControllerAuswerten {
 
@@ -151,6 +153,9 @@ public class ControllerAuswerten {
                     PieChart pieChart = new PieChart(pieChartData);
                     anchorPane.getChildren().addAll(pieChart);
 
+                    textMittelwert.setText("-");
+                    textStandardabweichung.setText("-");
+
                     countja = 0;
                     countnein = 0;
                 } catch (SQLException throwables) {
@@ -163,9 +168,13 @@ public class ControllerAuswerten {
             case 2:
                 System.out.println("Fragen-Typ => Min-Max");
                 anchorPane.getChildren().clear();
-                int count = 3;
+
+                pieChartData.clear();
+
                 int min = 0;
                 int max = 0;
+                int count = 3;
+
 
                 st = null;
                 try {
@@ -173,9 +182,26 @@ public class ControllerAuswerten {
                     ResultSet rs = st.executeQuery("SELECT value\n" +
                             "FROM avonbis\n" +
                             "JOIN antwort a on a.kennummer = avonbis.akn\n");
+
+                    List<Integer> integers = new ArrayList<>();
+
                     while (rs.next()) {
+                        integers.add(rs.getInt("value"));
                         System.out.println("Min-Max Wert: " + rs.getInt("value"));
                     }
+
+                    Map<Integer, Long> numMap = integers.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+                    System.out.println(numMap);
+
+                    numMap.forEach((i, anz) -> {
+                        pieChartData.add(new PieChart.Data(i.toString(), anz));
+                    });
+
+                    PieChart pieChart = new PieChart(pieChartData);
+                    anchorPane.getChildren().addAll(pieChart);
+
+
+
 
                     // Min-Max
                     ResultSet rsminmax = st.executeQuery("SELECT min, max\n" +
@@ -209,28 +235,20 @@ public class ControllerAuswerten {
                         textStandardabweichung.setText(String.valueOf(Math.round(rsstd.getFloat("value")*100.0)/100.0));
                     }
 
-
-
-
+/*
                     pieChartData = FXCollections.observableArrayList(
                             new PieChart.Data("text1",1),
                             new PieChart.Data("text3",8),
                             new PieChart.Data("text8",2)
 
                     );
-
-
-
-
+ */
                     rs.close();
                     st.close();
 
                     //Diagramm ertsellen:
                     //chartKreis.getData().clear();
                     //chartKreis.getData().addAll(pieChartData);
-
-                    PieChart pieChart = new PieChart(pieChartData);
-                    anchorPane.getChildren().addAll(pieChart);
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -255,27 +273,35 @@ public class ControllerAuswerten {
                     );
  */
                     CategoryAxis xAxis = new CategoryAxis();
-                    xAxis.setLabel("Devices");
+                    xAxis.setLabel("Werte");
 
                     NumberAxis yAxis = new NumberAxis();
-                    yAxis.setLabel("Visits");
+                    yAxis.setLabel("Häufigkeit");
 
-                    BarChart barChart = new BarChart(xAxis, yAxis);
+                    BarChart<String, Number> barChart = new BarChart<String, Number>(xAxis, yAxis);
 
                     XYChart.Series dataSeries1 = new XYChart.Series();
-                    dataSeries1.setName("2014");
+                    //dataSeries1.setName("2014");
 
                     st = db.createStatement();
                     ResultSet rs = st.executeQuery("SELECT value\n" +
                             "FROM anumerisch\n" +
-                            "JOIN antwort a on a.kennummer = anumerisch.akn\n");
+                            "JOIN antwort a on a.kennummer = anumerisch.akn;");
+
+                    List<Integer> integers = new ArrayList<>();
                     while (rs.next()) {
+                        integers.add(rs.getInt("value"));
                         System.out.println("Test-Num: " + rs.getInt("value"));
                     }
+                    Map<Integer, Long> numMap = integers.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+                    System.out.println(numMap);
 
+                    numMap.forEach((i, anz) -> {
+                    dataSeries1.getData().add(new XYChart.Data(i.toString(), anz));
+                    });
 
-
-
+                    barChart.getData().add(dataSeries1);
+                    anchorPane.getChildren().add(barChart);
 
                     // Mittelwert:
                     ResultSet rsavg = st.executeQuery("SELECT avg(value)::FLOAT AS value\n" +
